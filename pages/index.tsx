@@ -1,11 +1,20 @@
-import Navbar from "../components/navbar/Navbar";
+import { Button, Text } from "@chakra-ui/react";
+import MainLayout from "../components/layout/MainLayout";
 
 function index() {
   return (
-    <div>
-      <Navbar />
-      halo
-    </div>
+    <MainLayout>
+      <Text as="h1" fontSize="6xl" fontWeight="black">
+        Nurhuda
+        <br />
+        Joantama
+        <br />
+        Putra
+      </Text>
+      <Button size="lg" rounded="full">
+        Read Blog
+      </Button>
+    </MainLayout>
   );
 }
 

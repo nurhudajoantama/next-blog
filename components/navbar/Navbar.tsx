@@ -2,7 +2,7 @@ import { Box, Flex, useColorModeValue, Container, Text } from "@chakra-ui/react"
 import Link from "next/link";
 import ColorModeButton from "./ColorModeButton";
 
-export default function Nav() {
+export default function Navbar() {
   return (
     <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
       <Container maxW="container.xl">
