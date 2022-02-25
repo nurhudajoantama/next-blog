@@ -1,24 +1,24 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Center, Grid, GridItem, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
-import Link from "next/link";
+import { ArrowDownIcon, ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
+import { Box, Button, Center, Container, Grid, GridItem, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import NextLink from "next/link";
 import MainLayout from "../components/layout/MainLayout";
 
 function About() {
   const bgColor = useColorModeValue("gray.100", "gray.900");
   return (
-    <Box mt={7} rounded="lg" pb={4}>
-      <Box bgColor={bgColor} px={5} py={1} mb={3}>
+    <Box p={1}>
+      <Box bgColor={bgColor} px={5} py={2} mb={3}>
         <Text as="h2" fontSize="3xl" fontWeight="bold">
           About Me
         </Text>
       </Box>
       <Box px={5} py={1}>
-        <Text as="p" fontSize="md" mb={5}>
+        <Text as="p" fontSize="md" mb={5} lineHeight="7" letterSpacing="wide" wordBreak="break-word">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis? Lorem
           ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis? Lorem ipsum
           dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis?
         </Text>
-        <Button rightIcon={<ArrowForwardIcon />}>Read More</Button>
+        <Button rightIcon={<ArrowForwardIcon />}>Read More About Me</Button>
       </Box>
     </Box>
   );
@@ -26,7 +26,7 @@ function About() {
 
 function Blog({ blog }: any) {
   return (
-    <Link href={blog.link} passHref>
+    <NextLink href={blog.link} passHref>
       <Box as="a">
         <Box
           // border="1px"
@@ -39,7 +39,7 @@ function Blog({ blog }: any) {
           }}
           role="group"
         >
-          <Text as="h2" fontSize="xl" fontWeight="bold" mb={3} _peerHover={{ textDecoration: "underline" }}>
+          <Text as="h2" fontSize="xl" fontWeight="bold" mb={3}>
             {blog.title}
           </Text>
           <Text as="p" fontSize="md" mb={2}>
@@ -60,7 +60,7 @@ function Blog({ blog }: any) {
           </Text>
         </Box>
       </Box>
-    </Link>
+    </NextLink>
   );
 }
 
@@ -91,9 +91,19 @@ function LatestBlog() {
   return (
     <Box>
       <Box borderBottom="2px" py={1} mb={7}>
-        <Text as="h2" fontSize="3xl" fontWeight="bold">
-          Latest Blog
-        </Text>
+        <NextLink href="/blog" passHref>
+          <Text
+            as="h2"
+            fontSize="3xl"
+            fontWeight="bold"
+            cursor="pointer"
+            _hover={{
+              color: "gray.500",
+            }}
+          >
+            Latest Blog
+          </Text>
+        </NextLink>
       </Box>
       <Box>
         <Stack spacing={7}>
@@ -106,6 +116,25 @@ function LatestBlog() {
   );
 }
 
+function Quotes() {
+  return (
+    <Box bg={useColorModeValue("gray.300", "gray.700")} px={12} py={24} rounded="lg">
+      <Text
+        as="h1"
+        fontSize={{
+          base: "3xl",
+          lg: "6xl",
+        }}
+        fontWeight="bold"
+        letterSpacing="wide"
+      >
+        Be better everyday, <br />
+        everytime and everyplace.
+      </Text>
+    </Box>
+  );
+}
+
 export default function Index() {
   return (
     <MainLayout>
@@ -114,20 +143,31 @@ export default function Index() {
           Nurhuda Joantama Putra
         </Text>
       </Center>
-      <SimpleGrid columns={{ sm: 1, lg: 3 }} gap={12} my={5}>
-        <GridItem>
-          <About />
-        </GridItem>
-        <GridItem colSpan={2}>
-          <LatestBlog />
-        </GridItem>
-      </SimpleGrid>
-      <Box bg={useColorModeValue("gray.300", "gray.700")} my={20} px={12} py={24} rounded="lg">
-        <Text as="h1" fontSize={{ base: "3xl", lg: "6xl" }} fontWeight="bold">
-          Be better everyday, <br />
-          everytime and everyplace.
-        </Text>
+      <Container maxW="container.md" mb={7}>
+        <About />
+      </Container>
+      <Box>
+        <Link href="#latest-blog" role="group">
+          <IconButton
+            aria-label="down-icon"
+            icon={<ArrowDownIcon />}
+            rounded="full"
+            mr="3"
+            _groupHover={{
+              outline: "2px solid",
+            }}
+          />
+          <Text as="span" fontSize="md">
+            Latest Blog
+          </Text>
+        </Link>
       </Box>
+      <Box mt={5} mb={12}>
+        <Quotes />
+      </Box>
+      <Container maxW="container.lg" id="latest-blog" mb={20}>
+        <LatestBlog />
+      </Container>
     </MainLayout>
   );
 }
