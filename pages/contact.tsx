@@ -4,6 +4,8 @@ import MainLayout from "../components/layout/MainLayout";
 import GithubIcon from "../components/icons/GithubIcon";
 import InstagramIcon from "../components/icons/InstagramIcon";
 import TwitterIcon from "../components/icons/TwitterIcon";
+import LinkedinIcon from "../components/icons/LinkedinIcon";
+import FacebookIcon from "../components/icons/FacebookIcon";
 
 const socials = [
   {
@@ -11,6 +13,12 @@ const socials = [
     url: "https://github.com",
     desc: "nurhudajoantama",
     icon: GithubIcon,
+  },
+  {
+    name: "LinkedIn",
+    url: "",
+    desc: "nurhudajoantama",
+    icon: LinkedinIcon,
   },
   {
     name: "Instagram",
@@ -23,6 +31,12 @@ const socials = [
     url: "",
     desc: "@JoantamaP",
     icon: TwitterIcon,
+  },
+  {
+    name: "Facebook",
+    url: "",
+    desc: "nurhudajoantama",
+    icon: FacebookIcon,
   },
 ];
 
