@@ -72,7 +72,8 @@ export default function Navbar() {
               md: "none",
             }}
           >
-            <IconButton aria-label="menu" icon={<HamburgerIcon />} onClick={onOpen}>
+            <ColorModeButton />
+            <IconButton aria-label="menu" icon={<HamburgerIcon />} onClick={onOpen} ml={3}>
               Open
             </IconButton>
             <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -88,7 +89,6 @@ export default function Navbar() {
                         <Link href={nav.url}>{nav.name}</Link>
                       </Text>
                     ))}
-                    <ColorModeButton />
                   </VStack>
                 </DrawerBody>
               </DrawerContent>
