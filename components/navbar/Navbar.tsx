@@ -26,6 +26,10 @@ import ColorModeButton from "./ColorModeButton";
 export default function Navbar() {
   const navs = [
     {
+      name: "Home",
+      url: "/",
+    },
+    {
       name: "Blog",
       url: "/blog",
     },
