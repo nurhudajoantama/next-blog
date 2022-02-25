@@ -91,19 +91,16 @@ function LatestBlog() {
   return (
     <Box>
       <Box borderBottom="2px" py={1} mb={7}>
-        <NextLink href="/blog" passHref>
-          <Text
-            as="h2"
-            fontSize="3xl"
-            fontWeight="bold"
-            cursor="pointer"
-            _hover={{
-              color: "gray.500",
-            }}
-          >
-            Latest Blog
-          </Text>
-        </NextLink>
+        <Text
+          as="h2"
+          fontSize="3xl"
+          fontWeight="bold"
+          _hover={{
+            color: "gray.500",
+          }}
+        >
+          <NextLink href="/blog">Latest Blog</NextLink>
+        </Text>
       </Box>
       <Box>
         <Stack spacing={7}>
