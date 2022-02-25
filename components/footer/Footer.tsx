@@ -1,4 +1,4 @@
-import { Box, useColorModeValue, Container, Flex, Text, HStack, VStack, Spacer, Stack } from "@chakra-ui/react";
+import { Box, useColorModeValue, Container, Flex, Text, HStack, VStack, Spacer, Stack, Center } from "@chakra-ui/react";
 import Link from "next/link";
 import GithubIcon from "../icons/GithubIcon";
 import InstagramIcon from "../icons/InstagramIcon";
@@ -23,13 +23,21 @@ function FooterSocialIcon() {
     },
   ];
   return (
-    <HStack spacing={5}>
-      {socials.map((social) => (
-        <a key={social.name} href={social.url} target="_blank" rel="noreferrer">
-          <social.icon fontSize="xl" cursor="pointer" />
-        </a>
-      ))}
-    </HStack>
+    <>
+      <HStack spacing={5}>
+        {socials.map((social) => (
+          <a key={social.name} href={social.url} target="_blank" rel="noreferrer">
+            <social.icon
+              fontSize="2xl"
+              cursor="pointer"
+              _hover={{
+                color: "blue.500",
+              }}
+            />
+          </a>
+        ))}
+      </HStack>
+    </>
   );
 }
 
@@ -96,12 +104,6 @@ export default function Footer() {
     <Box bg={useColorModeValue("gray.100", "gray.900")} py={12} mt={12}>
       <Container maxW="container.xl" borderTop="2px" pt={7}>
         <Flex direction={{ base: "column", md: "row" }} alignItems={{ base: "start", md: "center" }} justifyContent="space-between">
-          <Box my={3} borderBottom="1px">
-            <Text as="p" fontSize="md">
-              &copy; Nurhuda Joantama Putra 2022
-            </Text>
-          </Box>
-          <Spacer />
           <Box my={3}>
             <Stack direction={["column", "row"]} spacing={7} align="start" mr={12}>
               <LinkFooter link={gundarLink} />
@@ -112,6 +114,13 @@ export default function Footer() {
             <FooterSocialIcon />
           </Box>
         </Flex>
+        <Center>
+          <Box my={3} borderBottom="1px">
+            <Text as="p" fontSize="md">
+              &copy; Nurhuda Joantama Putra 2022
+            </Text>
+          </Box>
+        </Center>
       </Container>
     </Box>
   );
