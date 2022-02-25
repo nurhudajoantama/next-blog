@@ -114,7 +114,7 @@ export default function Index() {
           Nurhuda Joantama Putra
         </Text>
       </Center>
-      <SimpleGrid columns={{ sm: 1, lg: 3 }} gap={12} my={3}>
+      <SimpleGrid columns={{ sm: 1, lg: 3 }} gap={12} my={5}>
         <GridItem>
           <About />
         </GridItem>
@@ -122,6 +122,12 @@ export default function Index() {
           <LatestBlog />
         </GridItem>
       </SimpleGrid>
+      <Box bg={useColorModeValue("gray.300", "gray.700")} my={20} px={12} py={24} rounded="lg">
+        <Text as="h1" fontSize={{ base: "3xl", lg: "6xl" }} fontWeight="bold">
+          Be better everyday, <br />
+          everytime and everyplace.
+        </Text>
+      </Box>
     </MainLayout>
   );
 }
