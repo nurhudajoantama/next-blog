@@ -1,8 +1,9 @@
 import { ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, LinkIcon } from "@chakra-ui/icons";
-import { Box, Button, Center, Container, Flex, Grid, GridItem, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Flex, Grid, GridItem, HStack, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import MainLayout from "../components/layout/MainLayout";
 import Image from "next/image";
+import { getAllPosts, Post } from "../lib/api";
 
 function About() {
   const bgColor = useColorModeValue("gray.100", "gray.900");
@@ -25,7 +26,8 @@ function About() {
   );
 }
 
-function Blog({ blog }: any) {
+function Blog({ blog }: { blog: Post }) {
+  const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <NextLink href={`/blog/${blog.slug}`} passHref>
       <Box role="group" as="a">
@@ -50,39 +52,24 @@ function Blog({ blog }: any) {
             _groupHover={{
               textDecoration: "underline",
             }}
+            mb={3}
           >
             {blog.title}
           </Text>
+          <HStack spacing={2}>
+            {blog.tags.map((tag) => (
+              <Box key={tag} px={2} py={0.5} rounded="sm" bg={tagBgColor}>
+                <Text fontSize="sm">{tag}</Text>
+              </Box>
+            ))}
+          </HStack>
         </Box>
       </Box>
     </NextLink>
   );
 }
 
-function LatestBlog() {
-  const mockBlogs = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eligendi ducimus blanditiis?",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-1",
-    },
-    {
-      id: 2,
-      title: "Blog 12",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-2",
-    },
-    {
-      id: 3,
-      title: "Blog 3",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-3",
-    },
-  ];
+function LatestBlog({ blogs }: { blogs: Post[] }) {
   return (
     <Box>
       <Box borderBottom="2px" py={1} mb={7}>
@@ -99,7 +86,7 @@ function LatestBlog() {
       </Box>
       <Box>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, xl: 7 }}>
-          {mockBlogs.map((blog, index) => (
+          {blogs.map((blog, index) => (
             <Blog key={index} blog={blog} />
           ))}
         </SimpleGrid>
@@ -127,7 +114,11 @@ function Quotes() {
   );
 }
 
-export default function Index() {
+type IndexProps = {
+  blogs: Post[];
+};
+
+export default function Index({ blogs }: IndexProps) {
   return (
     <MainLayout>
       <Center p={3} borderBottom="4px" mb={12}>
@@ -158,7 +149,7 @@ export default function Index() {
         <Quotes />
       </Box>
       <Container maxW="container.lg" id="latest-blog" mb={20}>
-        <LatestBlog />
+        <LatestBlog blogs={blogs} />
       </Container>
       <Flex justifyContent="end">
         <NextLink href="/" passHref>
@@ -184,4 +175,13 @@ export default function Index() {
       </Flex>
     </MainLayout>
   );
+}
+
+export function getStaticProps() {
+  const blogs = getAllPosts(["title", "date", "slug", "thumbnail", "tags"], 3);
+  return {
+    props: {
+      blogs,
+    },
+  };
 }
