@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "../../components/layout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
+import { SearchIcon } from "@chakra-ui/icons";
 
 function Blog(props: any) {
   const { blog } = props;
@@ -80,10 +81,16 @@ export default function Index() {
 
   return (
     <MainLayout>
-      <Box borderBottom="4px">
+      <Box px={7} py={10} rounded="lg" bg={useColorModeValue("gray.300", "gray.700")}>
         <Text as="h1" fontSize="5xl" fontWeight="black" letterSpacing="widest">
           Blog
         </Text>
+        <InputGroup my={12} display="flex" alignItems="center">
+          <InputLeftElement pointerEvents="none" top="unset" pl={2}>
+            <SearchIcon />
+          </InputLeftElement>
+          <Input placeholder="What you want to find ?" py={3} rounded="full" size="xl" w={450} />
+        </InputGroup>
       </Box>
       <Box my={12}>
         <SimpleGrid columns={{ base: 2, md: 3 }} spacing={{ base: 3, md: 5, xl: 12 }}>
