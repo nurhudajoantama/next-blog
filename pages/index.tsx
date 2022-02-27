@@ -177,7 +177,7 @@ export default function Index({ blogs }: IndexProps) {
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   const blogs = getAllPosts(["title", "date", "slug", "thumbnail", "tags"], 3);
   return {
     props: {
