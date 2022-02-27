@@ -5,11 +5,15 @@ import QuoteIcon from "../../components/icons/QuoteIcon";
 import MainLayout from "../../components/layout/MainLayout";
 import Image from "next/image";
 import { getAllPosts, getPostBySlug, Post } from "../../lib/api";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import components from "../../components/MDXcomponents";
 
 type BlogProps = {
   blog: Post;
+  source: { mdxSource: MDXRemoteSerializeResult };
 };
-export default function Blog({ blog }: BlogProps) {
+export default function Blog({ blog, source }: BlogProps) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <MainLayout>
@@ -36,7 +40,9 @@ export default function Blog({ blog }: BlogProps) {
             ))}
           </HStack>
         </Box>
-        <Box>{blog.content}</Box>
+        <Box>
+          <MDXRemote compiledSource="" {...source} components={components} />
+        </Box>
       </Container>
     </MainLayout>
   );
@@ -50,8 +56,9 @@ type Path = {
 
 export async function getStaticProps({ params }: Path) {
   const blog = getPostBySlug(params.slug, ["slug", "title", "thumbnail", "date", "content", "tags"]);
+  const mdxSource = await serialize(blog.content, {});
   return {
-    props: { blog },
+    props: { blog, source: mdxSource },
   };
 }
 
