@@ -2,6 +2,7 @@ import { ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, LinkIcon } from "@chakra-
 import { Box, Button, Center, Container, Flex, Grid, GridItem, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import MainLayout from "../components/layout/MainLayout";
+import Image from "next/image";
 
 function About() {
   const bgColor = useColorModeValue("gray.100", "gray.900");
@@ -26,37 +27,31 @@ function About() {
 
 function Blog({ blog }: any) {
   return (
-    <NextLink href={blog.link} passHref>
-      <Box as="a">
+    <NextLink href={`/blog/${blog.slug}`} passHref>
+      <Box role="group" as="a">
         <Box
-          // border="1px"
-          px={5}
-          py={3}
-          rounded="xl"
-          cursor="pointer"
-          _hover={{
+          _groupHover={{
             outline: "2px solid",
           }}
-          role="group"
+          p={0.5}
+          rounded="lg"
         >
-          <Text as="h2" fontSize="xl" fontWeight="bold" mb={3}>
-            {blog.title}
-          </Text>
-          <Text as="p" fontSize="md" mb={2}>
-            {blog.description}
-          </Text>
-          <Text as="p" fontSize="sm" color="gray.500" mb={2}>
+          <Box h={{ base: 200, sm: 340, md: 400, xl: 470 }} position="relative" rounded="lg" overflow="hidden">
+            <Image src={blog.thumbnail} alt={blog.title} layout="fill" objectFit="cover" />
+          </Box>
+        </Box>
+        <Box mx={1} mt={7} mb={5}>
+          <Text fontSize="md" color="gray.500">
             {blog.date}
           </Text>
           <Text
-            as="p"
-            fontSize="sm"
-            color={useColorModeValue("gray.600", "gray.400")}
+            fontSize={{ base: "lg", md: "xl" }}
+            fontWeight="bold"
             _groupHover={{
               textDecoration: "underline",
             }}
           >
-            Read More <ArrowForwardIcon />
+            {blog.title}
           </Text>
         </Box>
       </Box>
@@ -65,27 +60,27 @@ function Blog({ blog }: any) {
 }
 
 function LatestBlog() {
-  const blogMock = [
+  const mockBlogs = [
     {
-      title: "Lorem ipsum dolor sit amet",
+      id: 1,
+      title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eligendi ducimus blanditiis?",
+      thumbnail: "/images/default.png",
       date: "2020-01-01",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis?",
-      link: "/blog/1",
+      slug: "blog-1",
     },
     {
-      title: "Lorem ipsum dolor sit amet",
+      id: 2,
+      title: "Blog 12",
+      thumbnail: "/images/default.png",
       date: "2020-01-01",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis?",
-      link: "/blog/1",
+      slug: "blog-2",
     },
     {
-      title: "Lorem ipsum dolor sit amet",
+      id: 3,
+      title: "Blog 3",
+      thumbnail: "/images/default.png",
       date: "2020-01-01",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis?",
-      link: "/blog/1",
+      slug: "blog-3",
     },
   ];
   return (
@@ -103,11 +98,11 @@ function LatestBlog() {
         </Text>
       </Box>
       <Box>
-        <Stack spacing={7}>
-          {blogMock.map((blog, index) => (
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, xl: 7 }}>
+          {mockBlogs.map((blog, index) => (
             <Blog key={index} blog={blog} />
           ))}
-        </Stack>
+        </SimpleGrid>
       </Box>
     </Box>
   );
