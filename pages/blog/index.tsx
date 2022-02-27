@@ -81,7 +81,7 @@ export default function Index() {
 
   return (
     <MainLayout>
-      <Box px={7} py={10} rounded="lg" bg={useColorModeValue("gray.300", "gray.700")}>
+      <Box px={7} py={10} rounded="lg" bg={useColorModeValue("gray.100", "gray.700")}>
         <Text as="h1" fontSize="5xl" fontWeight="black" letterSpacing="widest">
           Blog
         </Text>
@@ -89,7 +89,7 @@ export default function Index() {
           <InputLeftElement pointerEvents="none" top="unset" pl={2}>
             <SearchIcon />
           </InputLeftElement>
-          <Input placeholder="What you want to find ?" py={3} rounded="full" size="xl" w={450} />
+          <Input placeholder="What you want to find ?" variant="outline" py={3} rounded="full" size="xl" w={450} />
         </InputGroup>
       </Box>
       <Box my={12}>
