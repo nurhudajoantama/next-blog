@@ -1,5 +1,5 @@
-import { ArrowDownIcon, ArrowForwardIcon, LinkIcon } from "@chakra-ui/icons";
-import { Box, Button, Center, Container, Grid, GridItem, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { ArrowDownIcon, ArrowForwardIcon, ArrowUpIcon, LinkIcon } from "@chakra-ui/icons";
+import { Box, Button, Center, Container, Flex, Grid, GridItem, IconButton, Link, SimpleGrid, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import MainLayout from "../components/layout/MainLayout";
 
@@ -133,6 +133,12 @@ function Quotes() {
 }
 
 export default function Index() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <MainLayout>
       <Center p={3} borderBottom="4px" mb={12}>
@@ -165,6 +171,28 @@ export default function Index() {
       <Container maxW="container.lg" id="latest-blog" mb={20}>
         <LatestBlog />
       </Container>
+      <Flex justifyContent="end">
+        <NextLink href="/" passHref>
+          <Flex
+            as="a"
+            align="center"
+            _hover={{
+              textDecoration: "underline",
+            }}
+          >
+            Back To Top
+            <IconButton
+              aria-label="up-icon"
+              icon={<ArrowUpIcon />}
+              rounded="full"
+              ml="3"
+              _groupHover={{
+                outline: "2px solid",
+              }}
+            />
+          </Flex>
+        </NextLink>
+      </Flex>
     </MainLayout>
   );
 }
