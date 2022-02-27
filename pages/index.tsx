@@ -133,12 +133,6 @@ function Quotes() {
 }
 
 export default function Index() {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
   return (
     <MainLayout>
       <Center p={3} borderBottom="4px" mb={12}>
