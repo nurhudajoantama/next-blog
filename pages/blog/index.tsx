@@ -1,12 +1,13 @@
 import React from "react";
-import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "../../components/layout/MainLayout";
 import Image from "next/image";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
+import { getAllPosts, Post } from "../../lib/api";
 
-function Blog(props: any) {
-  const { blog } = props;
+function Blog({ blog }: { blog: Post }) {
+  const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <Link href={`/blog/${blog.slug}`} passHref>
       <Box role="group" as="a">
@@ -31,59 +32,33 @@ function Blog(props: any) {
             _groupHover={{
               textDecoration: "underline",
             }}
+            mb={3}
           >
             {blog.title}
           </Text>
+          <HStack spacing={2}>
+            {blog.tags.map((tag) => (
+              <Box key={tag} px={2} py={0.5} rounded="sm" bg={tagBgColor}>
+                <Text fontSize="sm">{tag}</Text>
+              </Box>
+            ))}
+          </HStack>
         </Box>
       </Box>
     </Link>
   );
 }
 
-export default function Index() {
-  const mockBlogs = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eligendi ducimus blanditiis?",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-1",
-    },
-    {
-      id: 2,
-      title: "Blog 12",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-2",
-    },
-    {
-      id: 3,
-      title: "Blog 3",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-3",
-    },
-    {
-      id: 4,
-      title: "Blog 4",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-4",
-    },
-    {
-      id: 5,
-      title: "Blog 5",
-      thumbnail: "/images/default.png",
-      date: "2020-01-01",
-      slug: "blog-5",
-    },
-  ];
+type BlogProps = {
+  blogs: Post[];
+};
 
+export default function Index({ blogs }: BlogProps) {
   return (
     <MainLayout>
       <Box px={7} py={10} rounded="lg" bg={useColorModeValue("gray.100", "gray.700")}>
         <Text as="h1" fontSize="5xl" fontWeight="black" letterSpacing="widest">
-          Blog
+          <Link href="/blog">Blog</Link>
         </Text>
         <InputGroup my={12} display="flex" alignItems="center">
           <InputLeftElement pointerEvents="none" top="unset" pl={2}>
@@ -94,11 +69,20 @@ export default function Index() {
       </Box>
       <Box my={12}>
         <SimpleGrid columns={{ base: 2, md: 3 }} spacing={{ base: 3, md: 5, xl: 12 }}>
-          {mockBlogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
+          {blogs.map((blog) => (
+            <Blog key={blog.slug} blog={blog} />
           ))}
         </SimpleGrid>
       </Box>
     </MainLayout>
   );
+}
+
+export async function getStaticProps() {
+  const blogs = getAllPosts(["title", "date", "slug", "thumbnail", "tags"]);
+  return {
+    props: {
+      blogs,
+    },
+  };
 }
