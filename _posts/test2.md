@@ -9,13 +9,37 @@ tags:
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, quam ipsa adipisci numquam eligendi totam vitae culpa quasi dignissimos magni! Ab quo molestias aspernatur?
 
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+##### Heading 6
+
 ---
 
-Mungkin anda kira postigan blog ini hanya dummy yang lupa dihapus pada saat development atau sebagainya.
+_Mungkin anda kira postigan blog ini hanya dummy yang lupa dihapus pada saat development atau sebagainya._
 
-Sebenarnya pada blog post ini saya hanya ingin membagikan apa yang saya tau tentang dummy text
+Sebenarnya pada blog post ini saya hanya ingin membagikan apa yang saya tau tentang dummy **text**
+
+1. halo
+1. halo
+1. halo
+
+- tes
+- tes
+- tes
 
 Sebelumnya saya juga penasaran dengan dummy text seperti ini, mengapa lorem ipsum selalu dipakai untuk dummy text?
+
+> Siapa yang itu, ialah yang ini
+
+![gambar](/images/default.png)
 
 Saya penasaran saat saya membuat blog ini karena saya membutuhkan banyak dummy text untuk mencoba berbagai tampilan pada blog ini, sehingga saya mulai mencari tau tentang lorem ipsum
 

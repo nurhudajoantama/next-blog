@@ -7,7 +7,7 @@ import Image from "next/image";
 import { getAllPosts, getPostBySlug, Post } from "../../lib/api";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import components from "../../components/MDXcomponents";
+import components from "../../components/blog/MDXcomponents";
 
 type BlogProps = {
   blog: Post;
