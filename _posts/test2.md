@@ -39,6 +39,13 @@ Sebelumnya saya juga penasaran dengan dummy text seperti ini, mengapa lorem ipsu
 
 > Siapa yang itu, ialah yang ini
 
+```javascript
+const hello = "Hello, world!";
+var x = 6;
+
+if (x > 5) console.log(hello);
+```
+
 ![gambar](/images/default.png)
 
 Saya penasaran saat saya membuat blog ini karena saya membutuhkan banyak dummy text untuk mencoba berbagai tampilan pada blog ini, sehingga saya mulai mencari tau tentang lorem ipsum
