@@ -1,125 +1,27 @@
-import { Box, useColorModeValue, Container, Flex, Text, HStack, VStack, Spacer, Stack, Center } from "@chakra-ui/react";
-import Link from "next/link";
-import GithubIcon from "../icons/GithubIcon";
-import InstagramIcon from "../icons/InstagramIcon";
-import TwitterIcon from "../icons/TwitterIcon";
-
-function FooterSocialIcon() {
-  const socials = [
-    {
-      name: "Github",
-      url: "https://github.com",
-      icon: GithubIcon,
-    },
-    {
-      name: "Instagram",
-      url: "",
-      icon: InstagramIcon,
-    },
-    {
-      name: "Twitter",
-      url: "",
-      icon: TwitterIcon,
-    },
-  ];
-  return (
-    <>
-      <HStack spacing={5}>
-        {socials.map((social) => (
-          <a key={social.name} href={social.url} target="_blank" rel="noreferrer">
-            <social.icon
-              fontSize="2xl"
-              cursor="pointer"
-              _hover={{
-                color: "blue.500",
-              }}
-            />
-          </a>
-        ))}
-      </HStack>
-    </>
-  );
-}
-
-type FooterLink = {
-  title: string;
-  links: {
-    name: string;
-    url: string;
-  }[];
-};
-
-const siteLink: FooterLink = {
-  title: "Site Link",
-  links: [
-    {
-      name: "Blog",
-      url: "/blog",
-    },
-    {
-      name: "About",
-      url: "/about",
-    },
-  ],
-};
-const gundarLink: FooterLink = {
-  title: "Gundar Link",
-  links: [
-    {
-      name: "Gunadarma Homepage",
-      url: "https://gunadarma.ac.id",
-    },
-    {
-      name: "Perpustakaan Gunadarma",
-      url: "https://library.gunadarma.ac.id/",
-    },
-    {
-      name: "LePKoM Gunadarma",
-      url: "https://vm.lepkom.gunadarma.ac.id/",
-    },
-    {
-      name: "Labti Gunadarma",
-      url: "http://ti.lab.gunadarma.ac.id/",
-    },
-  ],
-};
-
-function LinkFooter({ link }: { link: FooterLink }) {
-  return (
-    <VStack align="start">
-      <Text fontSize="md" fontWeight="bold">
-        {link.title}
-      </Text>
-      {link.links.map((link) => (
-        <Link key={link.name} href={link.url}>
-          {link.name}
-        </Link>
-      ))}
-    </VStack>
-  );
-}
+import { Box, useColorModeValue, Container, Flex, Center } from "@chakra-ui/react";
+import Copyright from "./Copyright";
+import FooterSocialIcon from "./FooterSocialIcon";
+import LinksFooters from "./LinksFooters";
 
 export default function Footer() {
   return (
     <Box bg={useColorModeValue("gray.100", "gray.900")} py={12} mt={12}>
       <Container maxW="container.xl" borderTop="2px" pt={7}>
+        {/* First Line */}
         <Flex direction={{ base: "column", md: "row" }} alignItems={{ base: "start", md: "center" }} justifyContent="space-between">
+          {/* Footers Links */}
           <Box my={3}>
-            <Stack direction={["column", "row"]} spacing={7} align="start" mr={12}>
-              <LinkFooter link={gundarLink} />
-              <LinkFooter link={siteLink} />
-            </Stack>
+            <LinksFooters />
           </Box>
+          {/* Social Media */}
           <Box alignSelf="start" my={3}>
             <FooterSocialIcon />
           </Box>
         </Flex>
+        {/* Second Line */}
         <Center>
-          <Box my={3} borderBottom="1px">
-            <Text as="p" fontSize="md">
-              &copy; Nurhuda Joantama Putra 2022
-            </Text>
-          </Box>
+          {/* Copyright */}
+          <Copyright />
         </Center>
       </Container>
     </Box>
