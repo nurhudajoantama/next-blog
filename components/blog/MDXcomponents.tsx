@@ -8,7 +8,9 @@ function Blockquote(props: TextProps) {
       <Box>
         <QuoteIcon fontSize="2xl" />
       </Box>
-      <Text fontSize="lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, sunt!</Text>
+      <Text fontSize="lg" {...props}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, sunt!
+      </Text>
     </Box>
   );
 }
