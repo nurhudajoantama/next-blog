@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, Flex, HStack, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, InputRightElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "../../components/layout/MainLayout";
-import Image from "next/image";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
 import { getAllPosts, Post } from "../../lib/api";
-import Blog from "../../components/blog/Blog";
+import Blog from "../../components/blogs/Blog";
 
 type BlogProps = {
   blogs: Post[];
