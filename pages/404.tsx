@@ -1,12 +1,19 @@
-import { Box, Text } from "@chakra-ui/react";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Button, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import MainLayout from "../components/layout/MainLayout";
 
 export default function Custom404() {
+  const { asPath } = useRouter();
   return (
     <MainLayout>
-      <Box h={450}>
+      <Box h={500}>
         <Text as="h1" fontSize="9xl" fontWeight="black" letterSpacing="widest">
           404
+        </Text>
+        <Text letterSpacing="wider" color="gray.500">
+          {asPath}
         </Text>
         <Text as="h6" fontSize="3xl">
           PAGE NOT BE FOUND
@@ -16,6 +23,13 @@ export default function Custom404() {
           <br />
           Are you sure you typed the correct URL?
         </Text>
+        <Box my={7}>
+          <Link href="/" passHref>
+            <Button as="a" leftIcon={<ArrowForwardIcon />}>
+              Go To Home
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </MainLayout>
   );
