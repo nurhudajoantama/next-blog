@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import React from "react";
+import Breadcrumb from "../breadcrumb/Breadcrumb";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 

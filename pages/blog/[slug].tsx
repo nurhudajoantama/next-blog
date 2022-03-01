@@ -1,15 +1,12 @@
 import { Container, Box, HStack, useColorModeValue, Text, useColorMode } from "@chakra-ui/react";
-// const mdxPrism = require("mdx-prism");
-import blog from ".";
-import QuoteIcon from "../../components/icons/QuoteIcon";
 import MainLayout from "../../components/layout/MainLayout";
 import Image from "next/image";
-import { getAllPosts, getPostBySlug, getPostWithContentBySlug, Post } from "../../lib/api";
-import { serialize } from "next-mdx-remote/serialize";
+import { getAllPosts, getPostWithContentBySlug, Post } from "../../lib/api";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import components from "../../components/blog/MDXcomponents";
 import { css, Global } from "@emotion/react";
 import { prismLightTheme, prismDarkTheme } from "../../style/prism";
+import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 type BlogProps = {
   blog: Post;
   source: { mdxSource: MDXRemoteSerializeResult };
@@ -24,9 +21,11 @@ export default function Blog({ blog, source }: BlogProps) {
           ${colorMode === "dark" ? prismDarkTheme : prismLightTheme} };
         `}
       />
+
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>
           <Box>
+            <Breadcrumb />
             <Text fontSize="3xl" fontWeight="bold">
               {blog.title}
             </Text>

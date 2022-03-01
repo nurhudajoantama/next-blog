@@ -6,6 +6,7 @@ import InstagramIcon from "../components/icons/InstagramIcon";
 import TwitterIcon from "../components/icons/TwitterIcon";
 import LinkedinIcon from "../components/icons/LinkedinIcon";
 import FacebookIcon from "../components/icons/FacebookIcon";
+import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 
 const socials = [
   {
@@ -44,6 +45,7 @@ export default function Contact() {
   return (
     <MainLayout>
       <Container maxW="container.md">
+        <Breadcrumb />
         <Box bg={useColorModeValue("gray.100", "gray.900")} px={7} py={3} rounded="md">
           <Text as="h1" fontSize="4xl" fontWeight="bold" letterSpacing="wider">
             Contact
