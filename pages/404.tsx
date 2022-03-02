@@ -2,7 +2,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MainLayout from "../components/layout/MainLayout";
+import MainLayout from "../src/components/layout/MainLayout";
 
 export default function Custom404() {
   const { asPath } = useRouter();

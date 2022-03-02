@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../src/components/layout/MainLayout";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
-import { getAllPosts, Post } from "../../lib/api";
-import Blog from "../../components/blogs/Blog";
+import { getAllPosts, Post } from "../../src/lib/api";
+import Blog from "../../src/components/blogs/Blog";
 
 const elasticlunr = require("elasticlunr");
 const data_posts = require("../../cache/data.js");

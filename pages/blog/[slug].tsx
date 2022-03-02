@@ -1,27 +1,21 @@
 import { Container, Box, HStack, useColorModeValue, Text, useColorMode } from "@chakra-ui/react";
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../src/components/layout/MainLayout";
 import Image from "next/image";
-import { getAllPosts, getPostWithContentBySlug, Post } from "../../lib/api";
+import { getAllPosts, getPostWithContentBySlug, Post } from "../../src/lib/api";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import components from "../../components/blog/MDXcomponents";
+import components from "../../src/components/blog/MDXcomponents";
 import { css, Global } from "@emotion/react";
-import { prismLightTheme, prismDarkTheme } from "../../style/prism";
-import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
+import PrismStyle from "../../src/styles/PrismStyle";
+import Breadcrumb from "../../src/components/breadcrumb/Breadcrumb";
 type BlogProps = {
   blog: Post;
   source: { mdxSource: MDXRemoteSerializeResult };
 };
 export default function Blog({ blog, source }: BlogProps) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
-  const { colorMode } = useColorMode();
   return (
     <>
-      <Global
-        styles={css`
-          ${colorMode === "dark" ? prismDarkTheme : prismLightTheme} };
-        `}
-      />
-
+      <PrismStyle />
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>
           <Box>

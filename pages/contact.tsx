@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Container, Flex, HStack, Link, Text, useColorModeValue, VStack } from "@chakra-ui/react";
-import MainLayout from "../components/layout/MainLayout";
-import GithubIcon from "../components/icons/GithubIcon";
-import InstagramIcon from "../components/icons/InstagramIcon";
-import TwitterIcon from "../components/icons/TwitterIcon";
-import LinkedinIcon from "../components/icons/LinkedinIcon";
-import FacebookIcon from "../components/icons/FacebookIcon";
-import Breadcrumb from "../components/breadcrumb/Breadcrumb";
+import MainLayout from "../src/components/layout/MainLayout";
+import GithubIcon from "../src/components/icons/GithubIcon";
+import InstagramIcon from "../src/components/icons/InstagramIcon";
+import TwitterIcon from "../src/components/icons/TwitterIcon";
+import LinkedinIcon from "../src/components/icons/LinkedinIcon";
+import FacebookIcon from "../src/components/icons/FacebookIcon";
+import Breadcrumb from "../src/components/breadcrumb/Breadcrumb";
 
 const socials = [
   {

@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import { theme } from "@chakra-ui/react";
+import { css, Global } from "@emotion/react";
+import { theme, useColorMode } from "@chakra-ui/react";
 
 const prismBaseTheme = css`
   code {
@@ -139,7 +139,7 @@ const prismBaseTheme = css`
   }
 `;
 
-export const prismLightTheme = css`
+const prismLightTheme = css`
   ${prismBaseTheme};
   code[class*="language-"],
   pre[class*="language-"] {
@@ -155,7 +155,7 @@ export const prismLightTheme = css`
   }
 `;
 
-export const prismDarkTheme = css`
+const prismDarkTheme = css`
   ${prismBaseTheme};
   :not(pre) > code[class*="language-"] {
     background: #011627;
@@ -226,3 +226,14 @@ export const prismDarkTheme = css`
     border: 1px solid ${theme.colors.gray[700]};
   }
 `;
+
+export default function PrismStyle() {
+  const { colorMode } = useColorMode();
+  return (
+    <Global
+      styles={css`
+          ${colorMode === "dark" ? prismDarkTheme : prismLightTheme} };
+        `}
+    />
+  );
+}

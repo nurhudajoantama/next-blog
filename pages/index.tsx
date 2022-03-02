@@ -1,11 +1,11 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Box, Center, Container, Flex, IconButton, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import MainLayout from "../components/layout/MainLayout";
-import { getAllPosts, Post } from "../lib/api";
-import About from "../components/home/About";
-import LatestBlog from "../components/home/LatestBlog";
-import Quotes from "../components/home/Quotes";
+import MainLayout from "../src/components/layout/MainLayout";
+import { getAllPosts, Post } from "../src/lib/api";
+import About from "../src/components/home/About";
+import LatestBlog from "../src/components/home/LatestBlog";
+import Quotes from "../src/components/home/Quotes";
 
 type IndexProps = {
   blogs: Post[];
