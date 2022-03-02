@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
-import { Post } from "../../lib/api";
+import { Post } from "../../../types/Post";
 import Blog from "./Blog";
 import Link from "next/link";
 

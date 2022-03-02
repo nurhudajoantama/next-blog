@@ -1,13 +1,14 @@
 import { Box, Container, Text } from "@chakra-ui/react";
 import React from "react";
-import Breadcrumb from "../src/components/breadcrumb/Breadcrumb";
+import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
+
 import MainLayout from "../src/components/layout/MainLayout";
 
 export default function About() {
   return (
     <MainLayout>
       <Container maxW="container.md">
-        <Breadcrumb />
+        <MyBreadcrumb />
         <Box py={2} borderBottom="4px" mb={7}>
           <Text as="h1" fontSize="5xl" fontWeight="bold">
             About

@@ -2,10 +2,12 @@ import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Box, Center, Container, Flex, IconButton, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import MainLayout from "../src/components/layout/MainLayout";
-import { getAllPosts, Post } from "../src/lib/api";
+import { getAllPosts } from "../src/lib/post-api";
+import { Post } from "../types/Post";
 import About from "../src/components/home/About";
 import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
+import { getAllPostCache } from "../src/lib/get-cache";
 
 type IndexProps = {
   blogs: Post[];
@@ -80,7 +82,8 @@ export default function Index({ blogs }: IndexProps) {
 }
 
 export async function getStaticProps() {
-  const blogs = getAllPosts(["title", "date", "slug", "thumbnail", "tags"], 3);
+  const allBlogs = getAllPostCache();
+  const blogs = allBlogs.slice(0, 3);
   return {
     props: {
       blogs,

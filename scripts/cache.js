@@ -1,49 +1,25 @@
 const elasticlunr = require("elasticlunr");
 const fs = require("fs");
-const { join } = require("path");
-const matter = require("gray-matter");
-// import { getAllPosts } from "../lib/api";
+const { getAllPosts } = require("../src/lib/post-api");
 
-const postsDirectory = join(process.cwd(), "_posts");
-
-function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+try {
+  fs.readdirSync("cache");
+} catch {
+  fs.mkdirSync("cache");
 }
 
-function getPostBySlug(slug, fields = []) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+const data_posts = getAllPosts(["title", "date", "slug", "thumbnail", "tags"]);
 
-  const items = {};
+// CACHING DATA
 
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      items[field] = content;
-    }
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
-    }
-  });
+const dataCacheFileContent = `exports.posts = ${JSON.stringify(data_posts)}`;
 
-  return items;
-}
+fs.writeFile("cache/data.js", dataCacheFileContent, (err) => {
+  if (err) throw err;
+  console.log("File saved");
+});
 
-function getAllPosts(fields = [], limit = 0, start = 0) {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-
-  if (limit > 0) return posts.slice(start, start + limit);
-  return posts;
-}
+// INDEX SEARCH CACHE
 
 const idx = elasticlunr(function () {
   this.setRef("slug");
@@ -51,7 +27,6 @@ const idx = elasticlunr(function () {
   this.addField("tags");
 });
 
-const data_posts = getAllPosts(["slug", "title", "tags"]);
 data_posts.forEach((post) => {
   idx.addDoc({
     slug: post.slug,
@@ -60,16 +35,9 @@ data_posts.forEach((post) => {
   });
 });
 
-// const fileContents = `const postsData = ${JSON.stringify(idx)}; export default postsData;`;
-const fileContents = `exports.posts = ${JSON.stringify(idx)}`;
+const indexFileContents = `exports.posts = ${JSON.stringify(idx)}`;
 
-try {
-  fs.readdirSync("cache");
-} catch {
-  fs.mkdirSync("cache");
-}
-
-fs.writeFile("cache/data.js", fileContents, (err) => {
+fs.writeFile("cache/index_search.js", indexFileContents, (err) => {
   if (err) throw err;
   console.log("File saved");
 });

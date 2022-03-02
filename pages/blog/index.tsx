@@ -3,11 +3,12 @@ import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorMod
 import MainLayout from "../../src/components/layout/MainLayout";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
-import { getAllPosts, Post } from "../../src/lib/api";
+import { getAllPosts } from "../../src/lib/post-api";
+import { Post } from "../../types/Post";
 import Blog from "../../src/components/blogs/Blog";
+import { getAllPostCache, getPostIndexSearchCache } from "../../src/lib/get-cache";
 
 const elasticlunr = require("elasticlunr");
-const data_posts = require("../../cache/data.js");
 
 type BlogProps = {
   blogs: Post[];
@@ -18,7 +19,8 @@ export default function Index(props: BlogProps) {
 
   const [blogs, setBlogs] = React.useState<Post[]>([]);
   const [search, setSearch] = React.useState("");
-  const idx = elasticlunr.Index.load(data_posts.posts);
+  const post_index = getPostIndexSearchCache();
+  const idx = elasticlunr.Index.load(post_index);
 
   React.useEffect(() => {
     setBlogs(allBlogs);
@@ -66,7 +68,7 @@ export default function Index(props: BlogProps) {
 }
 
 export async function getStaticProps() {
-  const blogs = getAllPosts(["title", "date", "slug", "thumbnail", "tags"]);
+  const blogs = getAllPostCache();
   return {
     props: {
       blogs,

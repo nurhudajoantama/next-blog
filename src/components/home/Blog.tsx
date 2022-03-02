@@ -1,5 +1,5 @@
 import { useColorModeValue, Box, HStack, Text } from "@chakra-ui/react";
-import { Post } from "../../lib/api";
+import { Post } from "../../../types/Post";
 import Link from "next/link";
 import Image from "next/image";
 

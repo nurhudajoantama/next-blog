@@ -11,7 +11,7 @@ function BreadcrumbEl({ href, children }: any) {
   );
 }
 
-export default function Breadcrumb_() {
+export default function MyBreadcrumb() {
   const router = useRouter();
   const { asPath } = router;
   const paths = asPath.replace(/^\//g, "").split("/");

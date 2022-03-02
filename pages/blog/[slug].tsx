@@ -1,15 +1,18 @@
 import { Container, Box, HStack, useColorModeValue, Text, useColorMode } from "@chakra-ui/react";
 import MainLayout from "../../src/components/layout/MainLayout";
 import Image from "next/image";
-import { getAllPosts, getPostWithContentBySlug, Post } from "../../src/lib/api";
+import { getAllPosts, getPostBySlug } from "../../src/lib/post-api";
+import { getSerializeContent } from "../../src/lib/mdx";
+import { Post } from "../../types/Post";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import components from "../../src/components/blog/MDXcomponents";
 import { css, Global } from "@emotion/react";
 import PrismStyle from "../../src/styles/PrismStyle";
-import Breadcrumb from "../../src/components/breadcrumb/Breadcrumb";
+
+import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
 type BlogProps = {
   blog: Post;
-  source: { mdxSource: MDXRemoteSerializeResult };
+  source: MDXRemoteSerializeResult;
 };
 export default function Blog({ blog, source }: BlogProps) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
@@ -19,7 +22,7 @@ export default function Blog({ blog, source }: BlogProps) {
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>
           <Box>
-            <Breadcrumb />
+            <MyBreadcrumb />
             <Text fontSize="3xl" fontWeight="bold">
               {blog.title}
             </Text>
@@ -42,7 +45,7 @@ export default function Blog({ blog, source }: BlogProps) {
             </HStack>
           </Box>
           <Box>
-            <MDXRemote {...blog.content} components={components} />
+            <MDXRemote {...source} components={components} />
           </Box>
         </Container>
       </MainLayout>
@@ -57,15 +60,15 @@ type Path = {
 };
 
 export async function getStaticProps({ params }: Path) {
-  const blog = await getPostWithContentBySlug(params.slug, ["slug", "title", "thumbnail", "date", "content", "tags"]);
-
+  const blog: any = getPostBySlug(params.slug, ["slug", "title", "thumbnail", "date", "content", "tags"]);
+  const source = await getSerializeContent(blog.content);
   return {
-    props: { blog },
+    props: { blog, source },
   };
 }
 
 export async function getStaticPaths(): Promise<{ paths: Path[]; fallback: boolean }> {
-  const blogs = getAllPosts(["slug"]);
+  const blogs: Post[] | any[] = getAllPosts(["slug"]);
   return {
     paths: blogs.map((blog) => ({ params: { slug: blog.slug } })),
     fallback: false,
