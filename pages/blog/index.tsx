@@ -6,11 +6,35 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { getAllPosts, Post } from "../../lib/api";
 import Blog from "../../components/blogs/Blog";
 
+const elasticlunr = require("elasticlunr");
+const data_posts = require("../../cache/data.js");
+
 type BlogProps = {
   blogs: Post[];
 };
 
-export default function Index({ blogs }: BlogProps) {
+export default function Index(props: BlogProps) {
+  const { blogs: allBlogs } = props;
+
+  const [blogs, setBlogs] = React.useState<Post[]>([]);
+  const [search, setSearch] = React.useState("");
+  const idx = elasticlunr.Index.load(data_posts.posts);
+
+  React.useEffect(() => {
+    setBlogs(allBlogs);
+  }, [allBlogs]);
+
+  React.useEffect(() => {
+    if (search) {
+      const results = idx.search(search, {
+        expand: true,
+      });
+      setBlogs(results.map((result: any) => allBlogs.find((blog) => blog.slug === result.ref)));
+    } else {
+      setBlogs(allBlogs);
+    }
+  }, [search, allBlogs, idx]);
+
   return (
     <MainLayout>
       {/* Box on top */}
@@ -25,7 +49,7 @@ export default function Index({ blogs }: BlogProps) {
           <InputLeftElement pointerEvents="none" top="unset" pl={2}>
             <SearchIcon />
           </InputLeftElement>
-          <Input placeholder="What you want to find ?" variant="outline" py={3} rounded="full" size="xl" w={450} />
+          <Input onChange={(e) => setSearch(e.target.value)} placeholder="What you want to find ?" variant="outline" py={3} rounded="full" size="xl" w={450} />
         </InputGroup>
       </Box>
 
