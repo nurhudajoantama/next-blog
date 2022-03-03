@@ -8,7 +8,7 @@ try {
   fs.mkdirSync("cache");
 }
 
-const data_posts = getAllPosts(["title", "date", "slug", "thumbnail", "tags"]);
+const data_posts = getAllPosts(["title", "date", "slug", "thumbnail", "tags", "content"]);
 
 // CACHING DATA
 

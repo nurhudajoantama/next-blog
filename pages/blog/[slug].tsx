@@ -10,6 +10,7 @@ import { css, Global } from "@emotion/react";
 import PrismStyle from "../../src/styles/PrismStyle";
 
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
+import { getAllPostCache, getPostCacheBySlug } from "../../src/lib/get-cache";
 type BlogProps = {
   blog: Post;
   source: MDXRemoteSerializeResult;
@@ -60,7 +61,7 @@ type Path = {
 };
 
 export async function getStaticProps({ params }: Path) {
-  const blog: any = getPostBySlug(params.slug, ["slug", "title", "thumbnail", "date", "content", "tags"]);
+  const blog: any = getPostCacheBySlug(params.slug);
   const source = await getSerializeContent(blog.content);
   return {
     props: { blog, source },
@@ -68,7 +69,7 @@ export async function getStaticProps({ params }: Path) {
 }
 
 export async function getStaticPaths(): Promise<{ paths: Path[]; fallback: boolean }> {
-  const blogs: Post[] | any[] = getAllPosts(["slug"]);
+  const blogs: Post[] | any[] = getAllPostCache();
   return {
     paths: blogs.map((blog) => ({ params: { slug: blog.slug } })),
     fallback: false,

@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/cache.js && next build",
+    "build": "yarn cache-post && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cache-post": "node scripts/cache.js"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
