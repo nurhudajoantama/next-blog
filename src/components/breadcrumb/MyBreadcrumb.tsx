@@ -25,8 +25,8 @@ export default function MyBreadcrumb() {
         {paths.map((path, index) => {
           if (index === 0) {
             return (
-              <BreadcrumbItem>
-                <BreadcrumbEl key={index} href={"/" + path}>
+              <BreadcrumbItem key={index}>
+                <BreadcrumbEl  href={"/" + path}>
                   {path}
                 </BreadcrumbEl>
               </BreadcrumbItem>
@@ -37,8 +37,8 @@ export default function MyBreadcrumb() {
               result += "/" + paths[resultIndex];
             }
             return (
-              <BreadcrumbItem>
-                <BreadcrumbEl key={index} href={result}>
+              <BreadcrumbItem key={index}>
+                <BreadcrumbEl  href={result}>
                   {path}
                 </BreadcrumbEl>
               </BreadcrumbItem>
