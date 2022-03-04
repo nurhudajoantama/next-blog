@@ -7,6 +7,7 @@ import { getAllPosts } from "../../src/lib/post-api";
 import { Post } from "../../types/Post";
 import Blog from "../../src/components/blogs/Blog";
 import { getAllPostCache, getPostIndexSearchCache } from "../../src/lib/get-cache";
+import Seo from "../../src/components/SEO/SEO";
 
 const elasticlunr = require("elasticlunr");
 
@@ -39,6 +40,14 @@ export default function Index(props: BlogProps) {
 
   return (
     <MainLayout>
+      <Seo
+        dataPage={{
+          title: "Blog - Nurhuda Joantama Putra",
+          description: "Blog page of Nurhuda Joantama Putra",
+          url: "/blog",
+        }}
+      />
+
       {/* Box on top */}
       <Box px={7} py={10} rounded="lg" bg={useColorModeValue("gray.100", "gray.700")}>
         {/* Title */}

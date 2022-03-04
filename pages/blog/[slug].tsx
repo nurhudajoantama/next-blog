@@ -11,6 +11,7 @@ import PrismStyle from "../../src/styles/PrismStyle";
 
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
 import { getAllPostCache, getPostCacheBySlug } from "../../src/lib/get-cache";
+import Seo from "../../src/components/SEO/SEO";
 type BlogProps = {
   blog: Post;
   source: MDXRemoteSerializeResult;
@@ -19,6 +20,7 @@ export default function Blog({ blog, source }: BlogProps) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <>
+      <Seo postData={blog} isBlogPost />
       <PrismStyle />
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>

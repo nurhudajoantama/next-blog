@@ -8,6 +8,7 @@ import LinkedinIcon from "../src/components/icons/LinkedinIcon";
 import FacebookIcon from "../src/components/icons/FacebookIcon";
 
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
+import Seo from "../src/components/SEO/SEO";
 
 const socials = [
   {
@@ -45,6 +46,13 @@ const socials = [
 export default function Contact() {
   return (
     <MainLayout>
+      <Seo
+        dataPage={{
+          title: "Contact - Nurhuda Joantama Putra",
+          description: "Contact page of Nurhuda Joantama Putra",
+          url: "/contact",
+        }}
+      />
       <Container maxW="container.md">
         <MyBreadcrumb />
         <Box bg={useColorModeValue("gray.100", "gray.900")} px={7} py={3} rounded="md">

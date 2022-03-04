@@ -3,10 +3,18 @@ import React from "react";
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 
 import MainLayout from "../src/components/layout/MainLayout";
+import Seo from "../src/components/SEO/SEO";
 
 export default function About() {
   return (
     <MainLayout>
+      <Seo
+        dataPage={{
+          title: "About - Nurhuda Joantama Putra",
+          description: "About page of Nurhuda Joantama Putra",
+          url: "/about",
+        }}
+      />
       <Container maxW="container.md">
         <MyBreadcrumb />
         <Box py={2} borderBottom="4px" mb={7}>

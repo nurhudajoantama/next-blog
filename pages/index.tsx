@@ -8,6 +8,7 @@ import About from "../src/components/home/About";
 import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
 import { getAllPostCache } from "../src/lib/get-cache";
+import Seo from "../src/components/SEO/SEO";
 
 type IndexProps = {
   blogs: Post[];
@@ -16,6 +17,7 @@ type IndexProps = {
 export default function Index({ blogs }: IndexProps) {
   return (
     <MainLayout>
+      <Seo />
       {/* Main title */}
       <Center p={3} borderBottom="4px" mb={12}>
         <Text as="h1" fontSize="6xl" fontWeight="black">

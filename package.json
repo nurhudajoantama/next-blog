@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "dotenv": "^16.0.0",
     "elasticlunr": "^0.9.5",
     "framer-motion": "^5",
     "gray-matter": "^4.0.3",
