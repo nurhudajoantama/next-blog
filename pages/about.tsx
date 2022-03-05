@@ -5,6 +5,20 @@ import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 import MainLayout from "../src/components/layout/MainLayout";
 import Seo from "../src/components/SEO/SEO";
 
+function AboutText() {
+  return (
+    <>
+      <Text as="p" fontSize="md" lineHeight="7" letterSpacing="wide">
+        Nama saya Nurhuda Joantama Putra, Saya adalah mahasiswa Teknik Informatika di Jakarta.
+        <br />
+        Saya senang dengan berbagai teknologi yang ada dan selalu ingin mempelajari sesuatu yang baru. Saya juga sangat senang mengatasi masalah dengan teknologi-teknologi.
+        <br />
+        Saat ini saya saya sangat tertarik dengan dunia data seperti <i>Machine Learning</i>, <i>artificial intelligence</i> serta hal lainnya yang berhubungan dengan data.
+      </Text>
+    </>
+  );
+}
+
 export default function About() {
   return (
     <MainLayout>
@@ -23,12 +37,7 @@ export default function About() {
           </Text>
         </Box>
         <Box maxW="container.md">
-          <Text as="p" fontSize="md" lineHeight="7" letterSpacing="wide">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo aspernatur porro doloremque. Earum culpa asperiores commodi vel deleniti minus vitae necessitatibus perferendis odit amet!
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo aspernatur porro doloremque. Earum culpa asperiores commodi vel deleniti minus vitae necessitatibus perferendis odit amet!
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo aspernatur porro doloremque. Earum culpa asperiores commodi vel deleniti minus vitae necessitatibus perferendis odit amet!
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo aspernatur porro doloremque. Earum culpa asperiores commodi vel deleniti minus vitae necessitatibus perferendis odit amet!
-          </Text>
+          <AboutText />
         </Box>
       </Container>
     </MainLayout>

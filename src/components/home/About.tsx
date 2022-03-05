@@ -1,5 +1,6 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { useColorModeValue, Box, Button, Text } from "@chakra-ui/react";
+import Link from "next/link";
 
 export default function About() {
   const bgColor = useColorModeValue("gray.100", "gray.900");
@@ -12,11 +13,13 @@ export default function About() {
       </Box>
       <Box px={5} py={1}>
         <Text as="p" fontSize="md" mb={5} lineHeight="7" letterSpacing="wide" wordBreak="break-word">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis? Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis? Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Iure, eligendi repellendus ex impedit, architecto, ad eaque sunt necessitatibus soluta voluptate sint obcaecati ipsam facilis?
+          Nama saya Nurhuda Joantama Putra, Saya adalah mahasiswa Teknik Informatika di Jakarta.
+          <br />
+          Saya senang dengan berbagai teknologi yang ada dan selalu ingin mempelajari sesuatu yang baru. Saya juga sangat senang mengatasi masalah dengan teknologi-teknologi.
         </Text>
-        <Button rightIcon={<ArrowForwardIcon />}>Read More About Me</Button>
+        <Link href="/about" passHref>
+          <Button rightIcon={<ArrowForwardIcon />}>Read More About Me</Button>
+        </Link>
       </Box>
     </Box>
   );

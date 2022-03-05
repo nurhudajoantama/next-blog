@@ -15,7 +15,7 @@ const prismBaseTheme = css`
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
-    line-height: ${theme.fontSizes.md};
+    line-height: ${theme.fontSizes.xl};
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;

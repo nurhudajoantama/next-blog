@@ -8,11 +8,13 @@ function Blockquote(props: TextProps) {
       <Box>
         <QuoteIcon fontSize="2xl" />
       </Box>
-      <Text fontSize="lg" {...props}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, sunt!
-      </Text>
+      <Text fontSize="lg" {...props} />
     </Box>
   );
+}
+
+function LinkBlock(props: LinkProps) {
+  return <Link color={useColorModeValue("blue.600", "blue.300")} {...props} />;
 }
 
 const components = {
@@ -32,7 +34,7 @@ const components = {
   strong: (props: TextProps) => <Text as="strong" fontSize="md" fontWeight="bold" {...props} />,
 
   // link
-  a: (props: LinkProps) => <Link isExternal {...props} />,
+  a: (props: LinkProps) => <LinkBlock {...props} />,
 
   // divider
   hr: () => <Divider my={3} />,
@@ -43,7 +45,7 @@ const components = {
   li: (props: ListItemProps) => <ListItem {...props} />,
 
   // image
-  img: (props: ImageProps) => <Image alt="image" {...props} />,
+  img: (props: ImageProps) => <Image w="full" h="auto" alt="image" {...props} />,
 
   // blockquote
   blockquote: (props: TextProps) => <Blockquote {...props} />,
