@@ -8,8 +8,6 @@ tags:
   - about
 ---
 
-<!-- image blog -->
-
 Sebenarnya saya ingin menjelaskan apa tujuan dan apa saja yang nantinya akan saya masukkan kedalam blog ini dan lainnya.
 
 Tujuan awal dari pembuatan blog ini sebenarnya hanyalah untuk sarana tugas, karena pada universias tempat saya kuliah mengharuskan mahasiswanya untuk membuat blog, tetapi untuk kedepannya blog ini juga akan saya pakai sebagai sarana saya menyimpan pembelajaran dan pengetahuan saya.
