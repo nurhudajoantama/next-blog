@@ -8,7 +8,7 @@ module.exports = {
   siteDescription: "Nurhuda Joantama Putra Site",
   lang: "id",
   pathPrefix: "/",
-  siteLogo: "/favicon.ico",
+  siteLogo: "/favicon.png",
   siteDescription: "Nurhuda Joantama Putra Site",
   authorName: "Nurhuda Joantama Putra",
   twitter: "@JoantamaP",
