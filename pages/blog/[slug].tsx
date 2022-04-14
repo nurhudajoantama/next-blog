@@ -1,26 +1,28 @@
+import React from "react";
+
 import { Container, Box, HStack, useColorModeValue, Text, useColorMode } from "@chakra-ui/react";
 import MainLayout from "../../src/components/layout/MainLayout";
 import Image from "next/image";
-import { getAllPosts, getPostBySlug } from "../../src/lib/post-api";
 import { getSerializeContent } from "../../src/lib/mdx";
 import { Post } from "../../types/Post";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import components from "../../src/components/blog/MDXcomponents";
-import { css, Global } from "@emotion/react";
 import PrismStyle from "../../src/styles/PrismStyle";
-
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
 import { getAllPostCache, getPostCacheBySlug } from "../../src/lib/get-cache";
 import Seo from "../../src/components/SEO/SEO";
-type BlogProps = {
+import { GetServerSideProps } from "next";
+
+interface BlogProps {
   blog: Post;
   source: MDXRemoteSerializeResult;
-};
-export default function Blog({ blog, source }: BlogProps) {
+}
+
+const Blog: React.FC<BlogProps> = ({ blog, source }) => {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <>
-      <Seo postData={blog} isBlogPost />
+      {/* <Seo postData={blog} isBlogPost /> */}
       <PrismStyle />
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>
@@ -54,26 +56,27 @@ export default function Blog({ blog, source }: BlogProps) {
       </MainLayout>
     </>
   );
-}
-
-type Path = {
-  params: {
-    slug: string;
-  };
 };
 
-export async function getStaticProps({ params }: Path) {
-  const blog: any = getPostCacheBySlug(params.slug);
-  const source = await getSerializeContent(blog.content);
-  return {
-    props: { blog, source },
-  };
-}
+export default Blog;
 
-export async function getStaticPaths(): Promise<{ paths: Path[]; fallback: boolean }> {
-  const blogs: Post[] | any[] = getAllPostCache();
-  return {
-    paths: blogs.map((blog) => ({ params: { slug: blog.slug } })),
-    fallback: false,
-  };
-}
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { slug } = ctx.params!;
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  if (res.status === 404) {
+    return {
+      notFound: true,
+    };
+  }
+  const data = await res.json();
+  const blog = data.post;
+  const source = await getSerializeContent(blog.content);
+
+  return { props: { blog, source } };
+};

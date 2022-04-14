@@ -13,13 +13,13 @@ export const getAllBlogFromCache = (): Post[] => {
   return posts;
 };
 
-export const getBlogFromSlugCache = (slug: string): Post | undefined => {
+export const getBlogFromSlugCache = (slug: string): Post | null => {
   const files = join(postCacheDirectory, `${slug}.json`);
   try {
     const post: Post = JSON.parse(fs.readFileSync(files, "utf8"));
     return post;
   } catch {
-    return undefined;
+    return null;
   }
 };
 

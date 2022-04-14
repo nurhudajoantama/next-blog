@@ -6,10 +6,17 @@ const handler: NextApiHandler = (req, res) => {
 
   const post = getBlogFromSlugCache(slug);
 
-  res.status(200).json({
-    success: true,
-    post,
-  });
+  if (post) {
+    res.status(200).json({
+      success: true,
+      post,
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      message: "Post not found",
+    });
+  }
 };
 
 export default handler;
