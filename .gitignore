@@ -19,6 +19,8 @@
 /out/
 
 # production
+*/json/
+sitemap*
 /build
 
 # misc

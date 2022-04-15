@@ -7,7 +7,9 @@
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "cache-post": "node scripts/cache.js"
+    "prebuild": "yarn cache-search && yarn create-json",
+    "cache-search": "node scripts/cache-index-search.js",
+    "create-json": "node scripts/create-json.js"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
