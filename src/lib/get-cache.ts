@@ -18,8 +18,19 @@ export const getBlogFromSlugCache = (slug: string): Post | null => {
   try {
     const post: Post = JSON.parse(fs.readFileSync(files, "utf8"));
     return post;
-  } catch {
+  } catch (e) {
+    console.log(e);
     return null;
+  }
+};
+
+export const getIndexSearch = () => {
+  const files = join(process.cwd(), `cache/index_search.json`);
+  try {
+    const post = JSON.parse(fs.readFileSync(files, "utf8"));
+    return post;
+  } catch (e) {
+    console.log(e);
   }
 };
 
