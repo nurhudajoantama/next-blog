@@ -7,7 +7,8 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { Post } from "../../types/Post";
 import Blog from "../../src/components/blogs/Blog";
 import Seo from "../../src/components/SEO/SEO";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
+import { getAllBlogFromCache } from "../../src/lib/get-cache";
 
 interface BlogProps {
   blogs: Post[];
@@ -68,33 +69,11 @@ const Index: React.FC<BlogProps> = (props) => {
 
 export default Index;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const apiUrl = `http://localhost:3000/api/blog`;
-
-  // handle 404
-
-  const search = ctx.query?.search as string;
-  if (search && search.length > 0) {
-    const res = await fetch(`${apiUrl}?search=${search}`);
-    if (res.status === 404) {
-      return {
-        props: {
-          blogs: [],
-        },
-      };
-    }
-
-    const data = await res.json();
-    const blogs: Post[] = data.data;
-    return {
-      props: { blogs },
-    };
-  }
-
-  const res = await fetch(apiUrl);
-  const data = await res.json();
-  const blogs: Post[] = data.data;
+export const getStaticProps: GetStaticProps = () => {
+  const posts = getAllBlogFromCache();
   return {
-    props: { blogs },
+    props: {
+      blogs: posts,
+    },
   };
 };

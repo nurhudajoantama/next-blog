@@ -2,21 +2,26 @@ import { Post } from "../../types/Post";
 import fs from "fs";
 import { join } from "path";
 
-const postCacheDirectory = join(process.cwd(), "cache/blog");
-
-export const getAllBlogFromCache = (): Post[] => {
-  const files = fs.readdirSync(postCacheDirectory);
-  const posts = files.map((file) => {
-    const post: Post = JSON.parse(fs.readFileSync(join(postCacheDirectory, file), "utf8"));
-    return post;
-  });
-  return posts;
+export const getAllBlogFromCache = (limit = 0, start = 0): Post[] => {
+  const files_path = join(process.cwd(), `/public/json/blog.json`);
+  try {
+    const data = fs.readFileSync(files_path, "utf8");
+    const posts: Post[] = JSON.parse(data);
+    if (limit > 0) {
+      return posts.slice(start, start + limit);
+    }
+    return posts;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 };
 
 export const getBlogFromSlugCache = (slug: string): Post | null => {
-  const files = join(postCacheDirectory, `${slug}.json`);
+  const files_path = join(process.cwd(), `/public/json/blog/${slug}.json`);
   try {
-    const post: Post = JSON.parse(fs.readFileSync(files, "utf8"));
+    const data = fs.readFileSync(files_path, "utf8");
+    const post: Post = JSON.parse(data);
     return post;
   } catch (e) {
     console.log(e);
@@ -25,25 +30,12 @@ export const getBlogFromSlugCache = (slug: string): Post | null => {
 };
 
 export const getIndexSearch = () => {
-  const files = join(process.cwd(), `cache/index_search.json`);
+  const files_path = join(process.cwd(), `cache/index_search.json`);
   try {
-    const post = JSON.parse(fs.readFileSync(files, "utf8"));
+    const data = fs.readFileSync(files_path, "utf8");
+    const post = JSON.parse(data);
     return post;
   } catch (e) {
     console.log(e);
   }
 };
-
-export function getAllPostCache(): Post[] {
-  const { posts } = require("../../cache/data");
-  return posts;
-}
-export function getPostCacheBySlug(slug: string): Post | undefined {
-  const allPosts = getAllPostCache();
-  return allPosts.find((post) => post.slug === slug);
-}
-
-export function getPostIndexSearchCache() {
-  const { posts } = require("../../cache/index_search");
-  return posts;
-}

@@ -9,9 +9,9 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import components from "../../src/components/blog/MDXcomponents";
 import PrismStyle from "../../src/styles/PrismStyle";
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
-import { getAllPostCache, getPostCacheBySlug } from "../../src/lib/get-cache";
 import Seo from "../../src/components/SEO/SEO";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { getAllBlogFromCache, getBlogFromSlugCache } from "../../src/lib/get-cache";
 
 interface BlogProps {
   blog: Post;
@@ -22,7 +22,7 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
     <>
-      {/* <Seo postData={blog} isBlogPost /> */}
+      <Seo postData={blog} isBlogPost />
       <PrismStyle />
       <MainLayout>
         <Container maxW="container.md" mt={12} mb={7}>
@@ -60,29 +60,27 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
 
 export default Blog;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const slug = ctx.params?.slug as string;
-  if (!slug) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params?.slug as string;
+  const post = getBlogFromSlugCache(slug);
+  if (post === null) {
     return {
       notFound: true,
     };
   }
+  const source = await getSerializeContent(post.content);
+  return {
+    props: {
+      blog: post,
+      source,
+    },
+  };
+};
 
-  try {
-    const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
-    if (res.status === 404) {
-      return {
-        notFound: true,
-      };
-    }
-    const data = await res.json();
-    const blog: Post = data.data;
-    const source = await getSerializeContent(blog.content);
-    return { props: { blog, source } };
-  } catch (e) {
-    console.log(e);
-    return {
-      notFound: true,
-    };
-  }
+export const getStaticPaths: GetStaticPaths = () => {
+  const blogs = getAllBlogFromCache();
+  return {
+    paths: blogs.map((blog) => ({ params: { slug: blog.slug } })),
+    fallback: false,
+  };
 };
