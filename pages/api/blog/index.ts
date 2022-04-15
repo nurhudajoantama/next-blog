@@ -1,6 +1,6 @@
 import elasticlunr from "elasticlunr";
 import { NextApiHandler } from "next";
-import { getAllBlogFromCache, getIndexSearch } from "../../../src/lib/get-cache";
+import { getAllBlogFromCache, getBlogFromSlugCache, getIndexSearch } from "../../../src/lib/get-cache";
 
 const handler: NextApiHandler = async (req, res) => {
   const search = req.query.search as string;
@@ -8,11 +8,22 @@ const handler: NextApiHandler = async (req, res) => {
   if (search && search.length > 0) {
     const index = await getIndexSearch();
     const idx = elasticlunr.Index.load(index);
-    const posts = idx.search(search);
-    if (posts.length > 0) {
+    const results = idx.search(search);
+    if (results.length > 0) {
+      const data = results.map((res) => {
+        const post = getBlogFromSlugCache(res.ref);
+        return {
+          slug: post?.slug,
+          title: post?.title,
+          thumbnail: post?.thumbnail,
+          date: post?.date,
+          description: post?.description,
+          tags: post?.tags,
+        };
+      });
       return res.status(200).json({
         success: true,
-        data: posts,
+        data,
       });
     } else {
       return res.status(404).json({
@@ -22,19 +33,21 @@ const handler: NextApiHandler = async (req, res) => {
     }
   }
 
-  const posts = getAllBlogFromCache();
-  const data = posts.map((post) => {
-    return {
-      title: post.title,
-      slug: post.slug,
-      date: post.date,
-      description: post.description,
-      tags: post.tags,
-    };
-  });
+  const posts = getAllBlogFromCache()
+    .map((post) => {
+      return {
+        slug: post.slug,
+        title: post.title,
+        thumbnail: post.thumbnail,
+        date: post.date,
+        description: post.description,
+        tags: post.tags,
+      };
+    })
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   res.status(200).json({
     success: true,
-    data,
+    data: posts,
   });
 };
 

@@ -61,22 +61,28 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
 export default Blog;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { slug } = ctx.params!;
+  const slug = ctx.params?.slug as string;
   if (!slug) {
     return {
       notFound: true,
     };
   }
 
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
-  if (res.status === 404) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+    if (res.status === 404) {
+      return {
+        notFound: true,
+      };
+    }
+    const data = await res.json();
+    const blog: Post = data.data;
+    const source = await getSerializeContent(blog.content);
+    return { props: { blog, source } };
+  } catch (e) {
+    console.log(e);
     return {
       notFound: true,
     };
   }
-  const data = await res.json();
-  const blog = data.post;
-  const source = await getSerializeContent(blog.content);
-
-  return { props: { blog, source } };
 };

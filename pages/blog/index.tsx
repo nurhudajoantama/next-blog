@@ -1,42 +1,20 @@
 import React from "react";
-import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+
+import { Box, Button, FormControl, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "../../src/components/layout/MainLayout";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
-import { getAllPosts } from "../../src/lib/post-api";
 import { Post } from "../../types/Post";
 import Blog from "../../src/components/blogs/Blog";
-import { getAllPostCache, getPostIndexSearchCache } from "../../src/lib/get-cache";
 import Seo from "../../src/components/SEO/SEO";
+import { GetServerSideProps } from "next";
 
-const elasticlunr = require("elasticlunr");
-
-type BlogProps = {
+interface BlogProps {
   blogs: Post[];
-};
+}
 
-export default function Index(props: BlogProps) {
-  const { blogs: allBlogs } = props;
-
-  const [blogs, setBlogs] = React.useState<Post[]>([]);
-  const [search, setSearch] = React.useState("");
-  const post_index = getPostIndexSearchCache();
-  const idx = elasticlunr.Index.load(post_index);
-
-  React.useEffect(() => {
-    setBlogs(allBlogs);
-  }, [allBlogs]);
-
-  React.useEffect(() => {
-    if (search) {
-      const results = idx.search(search, {
-        expand: true,
-      });
-      setBlogs(results.map((result: any) => allBlogs.find((blog) => blog.slug === result.ref)));
-    } else {
-      setBlogs(allBlogs);
-    }
-  }, [search, allBlogs, idx]);
+const Index: React.FC<BlogProps> = (props) => {
+  const { blogs } = props;
 
   return (
     <MainLayout>
@@ -56,15 +34,27 @@ export default function Index(props: BlogProps) {
         </Text>
 
         {/* Search */}
-        <InputGroup my={12} display="flex" alignItems="center">
-          <InputLeftElement pointerEvents="none" top="unset" pl={2}>
-            <SearchIcon />
-          </InputLeftElement>
-          <Input onChange={(e) => setSearch(e.target.value)} placeholder="What you want to find ?" variant="outline" py={3} rounded="full" size="xl" w={450} />
-        </InputGroup>
+        <form method="GET">
+          <FormControl display="flex" alignItems="center" justifyContent="start">
+            <InputGroup my={12} display="flex" alignItems="center">
+              <InputLeftElement pointerEvents="none" top="unset" pl={2}>
+                <SearchIcon />
+              </InputLeftElement>
+              <Input name="search" placeholder="What you want to find ?" variant="outline" py={3} rounded="full" mr={7} size="xl" w="full" />
+            </InputGroup>
+            <Button type="submit">Search</Button>
+          </FormControl>
+        </form>
       </Box>
 
       {/* Blog List */}
+      {blogs.length == 0 && (
+        <Box px={7} py={10} rounded="lg">
+          <Text as="h3" fontSize="2xl" fontWeight="black" letterSpacing="widest" textAlign="center">
+            No Blogs Found
+          </Text>
+        </Box>
+      )}
       <Box my={12}>
         <SimpleGrid columns={{ base: 2, md: 3 }} spacing={{ base: 3, md: 5, xl: 12 }}>
           {blogs.map((blog) => (
@@ -74,13 +64,37 @@ export default function Index(props: BlogProps) {
       </Box>
     </MainLayout>
   );
-}
+};
 
-export async function getStaticProps() {
-  const blogs = getAllPostCache();
+export default Index;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiUrl = `http://localhost:3000/api/blog`;
+
+  // handle 404
+
+  const search = ctx.query?.search as string;
+  if (search && search.length > 0) {
+    const res = await fetch(`${apiUrl}?search=${search}`);
+    if (res.status === 404) {
+      return {
+        props: {
+          blogs: [],
+        },
+      };
+    }
+
+    const data = await res.json();
+    const blogs: Post[] = data.data;
+    return {
+      props: { blogs },
+    };
+  }
+
+  const res = await fetch(apiUrl);
+  const data = await res.json();
+  const blogs: Post[] = data.data;
   return {
-    props: {
-      blogs,
-    },
+    props: { blogs },
   };
-}
+};
