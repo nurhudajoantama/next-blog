@@ -1,21 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, Button, FormControl, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import MainLayout from "../../src/components/layout/MainLayout";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Post } from "../../types/Post";
 import Blog from "../../src/components/blogs/Blog";
 import Seo from "../../src/components/SEO/SEO";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { getAllBlogFromCache } from "../../src/lib/get-cache";
+import { useRouter } from "next/router";
 
 interface BlogProps {
   blogs: Post[];
 }
 
 const Index: React.FC<BlogProps> = (props) => {
-  const { blogs } = props;
+  const { blogs: allBlogs } = props;
+  const [blogs, setBlogs] = useState<Post[]>(allBlogs);
+  const router = useRouter();
+
+  useEffect(() => {
+    const searchQuery = router.query.s as string;
+    const timeout = setTimeout(async () => {
+      if (searchQuery && searchQuery.length > 0) {
+        const res = await fetch(`/api/blog/search?q=${searchQuery}`);
+        const { data: searchResult } = await res.json();
+        const result = searchResult.map((result: any) => allBlogs.find((blog) => blog.slug === result.ref));
+        setBlogs(result);
+      } else {
+        setBlogs(allBlogs);
+      }
+    }, 400);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [router.query.s, allBlogs]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchQuery = e.target.value;
+    if (searchQuery.length > 0) {
+      router.push(`?s=${searchQuery}`, `/blog?s=${searchQuery}`, { shallow: true });
+    } else {
+      router.push("", "/blog", { shallow: true });
+    }
+  };
 
   return (
     <MainLayout>
@@ -35,17 +65,13 @@ const Index: React.FC<BlogProps> = (props) => {
         </Text>
 
         {/* Search */}
-        <form method="GET">
-          <FormControl display="flex" alignItems="center" justifyContent="start">
-            <InputGroup my={12} display="flex" alignItems="center">
-              <InputLeftElement pointerEvents="none" top="unset" pl={2}>
-                <SearchIcon />
-              </InputLeftElement>
-              <Input name="search" placeholder="What you want to find ?" variant="outline" py={3} rounded="full" mr={7} size="xl" w="full" />
-            </InputGroup>
-            <Button type="submit">Search</Button>
-          </FormControl>
-        </form>
+
+        <InputGroup my={12} display="flex" alignItems="center">
+          <InputLeftElement pointerEvents="none" top="unset" pl={2}>
+            <SearchIcon />
+          </InputLeftElement>
+          <Input name="search" onChange={handleSearch} placeholder="What you want to find ?" variant="outline" py={3} rounded="full" mr={7} size="xl" w="full" />
+        </InputGroup>
       </Box>
 
       {/* Blog List */}
