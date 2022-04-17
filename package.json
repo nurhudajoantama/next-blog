@@ -3,11 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "yarn cache-post && next build && yarn postbuild",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
     "prebuild": "yarn cache-search && yarn create-json",
+    "postbuild": "next-sitemap",
     "cache-search": "node scripts/cache-index-search.js",
     "create-json": "node scripts/create-json.js"
   },
