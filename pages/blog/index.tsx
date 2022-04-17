@@ -19,6 +19,7 @@ const Index: React.FC<BlogProps> = (props) => {
   const { blogs: allBlogs } = props;
   const [blogs, setBlogs] = useState<Post[]>(allBlogs);
   const router = useRouter();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const searchQuery = router.query.s as string;
@@ -28,10 +29,11 @@ const Index: React.FC<BlogProps> = (props) => {
         const { data: searchResult } = await res.json();
         const result = searchResult.map((result: any) => allBlogs.find((blog) => blog.slug === result.ref));
         setBlogs(result);
+        setSearch(searchQuery);
       } else {
         setBlogs(allBlogs);
       }
-    }, 400);
+    }, 300);
 
     return () => {
       clearTimeout(timeout);
@@ -40,6 +42,7 @@ const Index: React.FC<BlogProps> = (props) => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = e.target.value;
+    setSearch(searchQuery);
     if (searchQuery.length > 0) {
       router.push(`?s=${searchQuery}`, `/blog?s=${searchQuery}`, { shallow: true });
     } else {
@@ -70,7 +73,7 @@ const Index: React.FC<BlogProps> = (props) => {
           <InputLeftElement pointerEvents="none" top="unset" pl={2}>
             <SearchIcon />
           </InputLeftElement>
-          <Input name="search" onChange={handleSearch} placeholder="What you want to find ?" variant="outline" py={3} rounded="full" mr={7} size="xl" w="full" />
+          <Input name="search" onChange={handleSearch} value={search} placeholder="What you want to find ?" variant="outline" py={3} rounded="full" mr={7} size="xl" w="full" />
         </InputGroup>
       </Box>
 
