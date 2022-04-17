@@ -1,10 +1,8 @@
 # MY BLOG
 
-This repository contains my blog site, run in [nurhudajoantama](https://nurhudajoantama.me).
+This repository contains my blog site, run in [nurhudajoantama.me](https://nurhudajoantama.me).
 
 ## To run the site
-
----
 
 ```bash
 $ npm run dev
