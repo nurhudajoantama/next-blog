@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Flex, HStack, Link, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import MainLayout from "../src/components/layout/MainLayout";
 import GithubIcon from "../src/components/icons/GithubIcon";
 import InstagramIcon from "../src/components/icons/InstagramIcon";
@@ -13,31 +13,31 @@ import Seo from "../src/components/SEO/SEO";
 const socials = [
   {
     name: "Github",
-    url: "https://github.com",
+    url: "https://github.com/nurhudajoantama",
     desc: "nurhudajoantama",
     icon: GithubIcon,
   },
   {
     name: "LinkedIn",
-    url: "",
+    url: "https://www.linkedin.com/in/nurhudajoantama",
     desc: "nurhudajoantama",
     icon: LinkedinIcon,
   },
   {
     name: "Instagram",
-    url: "",
+    url: "https://www.instagram.com/nurhudajoantama",
     desc: "@nurhudajoantama",
     icon: InstagramIcon,
   },
   {
     name: "Twitter",
-    url: "",
+    url: "https://twitter.com/JoantamaP",
     desc: "@JoantamaP",
     icon: TwitterIcon,
   },
   {
     name: "Facebook",
-    url: "",
+    url: "https://web.facebook.com/nurhudajoantama",
     desc: "nurhudajoantama",
     icon: FacebookIcon,
   },
