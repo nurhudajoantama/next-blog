@@ -7,7 +7,7 @@ import { Post } from "../types/Post";
 import About from "../src/components/home/About";
 import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
-import { getAllPostCache } from "../src/lib/get-cache";
+import { getAllBlogFromCache } from "../src/lib/get-cache";
 import Seo from "../src/components/SEO/SEO";
 
 type IndexProps = {
@@ -84,8 +84,7 @@ export default function Index({ blogs }: IndexProps) {
 }
 
 export async function getStaticProps() {
-  const allBlogs = getAllPostCache();
-  const blogs = allBlogs.slice(0, 3);
+  const blogs = getAllBlogFromCache(3);
   return {
     props: {
       blogs,
