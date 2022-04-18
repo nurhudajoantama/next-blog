@@ -1,7 +1,7 @@
 import { useColorModeValue, Box, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { Post } from "../../../types/Post";
+import { Post } from "../../../../types/Post";
 
 export default function Blog({ blog }: { blog: Post }) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
@@ -10,21 +10,20 @@ export default function Blog({ blog }: { blog: Post }) {
       <Box role="group" as="a">
         <Box
           _groupHover={{
-            outline: "2px solid",
+            outline: "2px solid gray",
           }}
-          p={0.5}
-          rounded="lg"
+          rounded="sm"
         >
-          <Box h={{ base: 250, sm: 370, md: 470, xl: 520 }} position="relative" rounded="lg" overflow="hidden">
+          <Box h={{ base: 220, md: 250, xl: 300 }} position="relative" rounded="sm" overflow="hidden">
             <Image src={blog.thumbnail} alt={blog.title} layout="fill" objectFit="cover" />
           </Box>
         </Box>
-        <Box mx={1} mt={7} mb={5}>
-          <Text fontSize="md" color="gray.500">
+        <Box mx={1} mt={4} mb={5}>
+          <Text fontSize="sm" color="gray.500">
             {blog.date}
           </Text>
           <Text
-            fontSize={{ base: "lg", md: "xl" }}
+            fontSize="lg"
             fontWeight="bold"
             _groupHover={{
               textDecoration: "underline",
