@@ -1,7 +1,7 @@
 import { useColorModeValue, Box, HStack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { Post } from "../../../../types/Post";
+import { Post } from "../../../types/Post";
 
 export default function Blog({ blog }: { blog: Post }) {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");

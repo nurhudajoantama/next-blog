@@ -84,7 +84,7 @@ export default function Index({ blogs }: IndexProps) {
 }
 
 export async function getStaticProps() {
-  const blogs = getAllBlogFromCache(3);
+  const blogs = getAllBlogFromCache(4);
   return {
     props: {
       blogs,

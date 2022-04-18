@@ -5,7 +5,7 @@ import MainLayout from "../../src/components/layout/MainLayout";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Post } from "../../types/Post";
-import Blog from "../../src/components/blog/index/Blog";
+import Blog from "../../src/components/blogs/Blog";
 import Seo from "../../src/components/SEO/SEO";
 import { GetStaticProps } from "next";
 import { getAllBlogFromCache } from "../../src/lib/get-cache";
@@ -62,7 +62,7 @@ const Index: React.FC<BlogProps> = (props) => {
 
       <Box>
         {/* Box on top */}
-        <Box px={7} py={5} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
+        <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
           {/* Title */}
           <Text as="h1" fontSize="3xl" fontWeight="black" letterSpacing="widest">
             <Link href="/blog">Blog</Link>

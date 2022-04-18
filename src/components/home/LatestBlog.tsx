@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { Post } from "../../../types/Post";
-import Blog from "./Blog";
+import Blog from "../blogs/Blog";
 import Link from "next/link";
 
 export default function LatestBlog({ blogs }: { blogs: Post[] }) {
@@ -19,7 +19,7 @@ export default function LatestBlog({ blogs }: { blogs: Post[] }) {
         </Text>
       </Box>
       <Box>
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, xl: 7 }}>
+        <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={{ base: 3, xl: 7 }}>
           {blogs.map((blog, index) => (
             <Blog key={index} blog={blog} />
           ))}
