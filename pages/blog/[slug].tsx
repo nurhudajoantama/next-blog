@@ -10,7 +10,7 @@ import components from "../../src/components/blog/MDXcomponents";
 import PrismStyle from "../../src/styles/PrismStyle";
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
 import Seo from "../../src/components/SEO/SEO";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllBlogFromCache, getBlogFromSlugCache } from "../../src/lib/get-cache";
 
 interface BlogProps {
@@ -35,7 +35,7 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
           </Box>
         </Container>
         <Container maxW="container.lg" mb={5}>
-          <Box position="relative" w="auto" h={600} rounded="md" overflow="hidden">
+          <Box position="relative" w="auto" h={{ base: 300, md: 600 }} rounded="md" overflow="hidden">
             <Image src={blog.thumbnail} alt="example" layout="fill" objectFit="cover" />
           </Box>
         </Container>
