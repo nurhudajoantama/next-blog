@@ -1,6 +1,7 @@
 {
-  "name": "blog-chakra",
-  "private": true,
+  "name": "nurhuda-joantama-blog-site",
+  "version": "1.9.0",
+  "author": "nurhudajoantama",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
