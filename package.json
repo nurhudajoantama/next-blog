@@ -2,6 +2,7 @@
   "name": "nurhuda-joantama-blog-site",
   "version": "1.9.0",
   "author": "nurhudajoantama",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
