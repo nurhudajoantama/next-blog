@@ -7,6 +7,7 @@ import LinkedinIcon from "../src/components/icons/LinkedinIcon";
 import FacebookIcon from "../src/components/icons/FacebookIcon";
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 import Seo from "../src/components/SEO/SEO";
+import { PageLayout } from "../src/components/layout/PageLayout";
 
 const socials = [
   {
@@ -43,7 +44,7 @@ const socials = [
 
 export default function Contact() {
   return (
-    <>
+    <PageLayout>
       <Seo
         dataPage={{
           title: "Contact - Nurhuda Joantama Putra",
@@ -82,6 +83,6 @@ export default function Contact() {
           </VStack>
         </Box>
       </Container>
-    </>
+    </PageLayout>
   );
 }

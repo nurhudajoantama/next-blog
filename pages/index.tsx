@@ -7,7 +7,7 @@ import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
 import { getAllBlogFromCache } from "../src/lib/get-cache";
 import Seo from "../src/components/SEO/SEO";
-import AnimatedSection from "../src/components/animation/AnimatedSection";
+import { PageLayout } from "../src/components/layout/PageLayout";
 
 type IndexProps = {
   blogs: Post[];
@@ -15,23 +15,21 @@ type IndexProps = {
 
 export default function Index({ blogs }: IndexProps) {
   return (
-    <>
+    <PageLayout>
       <Seo />
       {/* Main title */}
-      <AnimatedSection delay={0.1}>
-        <Center p={3} borderBottom="4px" mb={12}>
-          <Text as="h1" fontSize="6xl" fontWeight="black">
-            Nurhuda Joantama Putra
-          </Text>
-        </Center>
-      </AnimatedSection>
+
+      <Center p={3} borderBottom="4px" mb={12}>
+        <Text as="h1" fontSize="6xl" fontWeight="black">
+          Nurhuda Joantama Putra
+        </Text>
+      </Center>
 
       {/* About */}
-      <AnimatedSection delay={0.15}>
-        <Container maxW="container.md" mb={7}>
-          <About />
-        </Container>
-      </AnimatedSection>
+
+      <Container maxW="container.md" mb={7}>
+        <About />
+      </Container>
 
       <Box>
         <Link href="#latest-blog" role="group">
@@ -51,18 +49,16 @@ export default function Index({ blogs }: IndexProps) {
       </Box>
 
       {/* Quotes */}
-      <AnimatedSection delay={0.2}>
-        <Box mt={5} mb={12}>
-          <Quotes />
-        </Box>
-      </AnimatedSection>
+
+      <Box mt={5} mb={12}>
+        <Quotes />
+      </Box>
 
       {/* Latest Blog */}
-      <AnimatedSection delay={0.25}>
-        <Container maxW="container.lg" id="latest-blog" mb={20}>
-          <LatestBlog blogs={blogs} />
-        </Container>
-      </AnimatedSection>
+
+      <Container maxW="container.lg" id="latest-blog" mb={20}>
+        <LatestBlog blogs={blogs} />
+      </Container>
 
       <Flex justifyContent="end">
         <NextLink href="/" passHref>
@@ -86,7 +82,7 @@ export default function Index({ blogs }: IndexProps) {
           </Flex>
         </NextLink>
       </Flex>
-    </>
+    </PageLayout>
   );
 }
 

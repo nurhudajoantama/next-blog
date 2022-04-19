@@ -5,13 +5,16 @@ import Fonts from "../src/styles/Fonts";
 
 import "../src/styles/global.css";
 import MainLayout from "../src/components/layout/MainLayout";
+import MainAnimationPage from "../src/components/animation/MainAnimationPage";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <MainLayout>
-        <Fonts />
-        <Component {...pageProps} />
+        <MainAnimationPage>
+          <Fonts />
+          <Component {...pageProps} />
+        </MainAnimationPage>
       </MainLayout>
     </ChakraProvider>
   );

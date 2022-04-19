@@ -9,6 +9,7 @@ import { GetStaticProps } from "next";
 import { getAllBlogFromCache } from "../../src/lib/get-cache";
 import { useRouter } from "next/router";
 import AnimatedSection from "../../src/components/animation/AnimatedSection";
+import { PageLayout } from "../../src/components/layout/PageLayout";
 
 interface BlogProps {
   blogs: Post[];
@@ -50,7 +51,7 @@ const Index: React.FC<BlogProps> = (props) => {
   };
 
   return (
-    <>
+    <PageLayout>
       <Seo
         dataPage={{
           title: "Blog - Nurhuda Joantama Putra",
@@ -60,24 +61,22 @@ const Index: React.FC<BlogProps> = (props) => {
       />
 
       <Box>
-        <AnimatedSection delay={0.1}>
-          {/* Box on top */}
-          <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
-            {/* Title */}
-            <Text as="h1" fontSize="3xl" fontWeight="black" letterSpacing="widest">
-              <Link href="/blog">Blog</Link>
-            </Text>
-          </Box>
+        {/* Box on top */}
+        <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
+          {/* Title */}
+          <Text as="h1" fontSize="3xl" fontWeight="black" letterSpacing="widest">
+            <Link href="/blog">Blog</Link>
+          </Text>
+        </Box>
 
-          {/* Search */}
+        {/* Search */}
 
-          <InputGroup my={7} display="flex" alignItems="center">
-            <InputLeftElement pointerEvents="none" top="unset" pl={2}>
-              <SearchIcon />
-            </InputLeftElement>
-            <Input name="search" onChange={handleSearch} value={search} placeholder="What you want to find ?" py={3} rounded="sm" size="xl" w="full" />
-          </InputGroup>
-        </AnimatedSection>
+        <InputGroup my={7} display="flex" alignItems="center">
+          <InputLeftElement pointerEvents="none" top="unset" pl={2}>
+            <SearchIcon />
+          </InputLeftElement>
+          <Input name="search" onChange={handleSearch} value={search} placeholder="What you want to find ?" py={3} rounded="sm" size="xl" w="full" />
+        </InputGroup>
       </Box>
 
       {/* Blog List */}
@@ -97,7 +96,7 @@ const Index: React.FC<BlogProps> = (props) => {
           ))}
         </SimpleGrid>
       </Box>
-    </>
+    </PageLayout>
   );
 };
 

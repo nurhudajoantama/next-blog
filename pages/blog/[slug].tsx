@@ -10,6 +10,7 @@ import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
 import Seo from "../../src/components/SEO/SEO";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllBlogFromCache, getBlogFromSlugCache } from "../../src/lib/get-cache";
+import { PageLayout } from "../../src/components/layout/PageLayout";
 
 interface BlogProps {
   blog: Post;
@@ -19,7 +20,7 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ blog, source }) => {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
-    <>
+    <PageLayout>
       <Seo postData={blog} isBlogPost />
       <PrismStyle />
       <Container maxW="container.md" mt={12} mb={7}>
@@ -50,7 +51,7 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
           <MDXRemote {...source} components={components} />
         </Box>
       </Container>
-    </>
+    </PageLayout>
   );
 };
 
