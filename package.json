@@ -19,7 +19,7 @@
     "@emotion/styled": "^11",
     "dotenv": "^16.0.0",
     "elasticlunr": "^0.9.5",
-    "framer-motion": "^5",
+    "framer-motion": "^6.3.0",
     "gray-matter": "^4.0.3",
     "husky": "^7.0.4",
     "mdx-prism": "^0.3.4",
