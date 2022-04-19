@@ -20,8 +20,7 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ blog, source }) => {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
   return (
-    <PageLayout>
-      <Seo postData={blog} isBlogPost />
+    <PageLayout seo={{ postData: blog, isBlogPost: true }}>
       <PrismStyle />
       <Container maxW="container.md" mb={7}>
         <Box>

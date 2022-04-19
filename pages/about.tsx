@@ -20,14 +20,15 @@ function AboutText() {
 
 export default function About() {
   return (
-    <PageLayout>
-      <Seo
-        dataPage={{
+    <PageLayout
+      seo={{
+        dataPage: {
           title: "About - Nurhuda Joantama Putra",
           description: "About page of Nurhuda Joantama Putra",
           url: "/about",
-        }}
-      />
+        },
+      }}
+    >
       <Container maxW="container.md">
         <MyBreadcrumb />
         <Box py={2} borderBottom="4px" mb={7}>

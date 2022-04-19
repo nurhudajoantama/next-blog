@@ -45,14 +45,15 @@ const socials = [
 
 export default function Contact() {
   return (
-    <PageLayout>
-      <Seo
-        dataPage={{
+    <PageLayout
+      seo={{
+        dataPage: {
           title: "Contact - Nurhuda Joantama Putra",
           description: "Contact page of Nurhuda Joantama Putra",
           url: "/contact",
-        }}
-      />
+        },
+      }}
+    >
       <Container maxW="container.md">
         <MyBreadcrumb />
         <Box bg={useColorModeValue("gray.100", "gray.900")} px={7} py={3} rounded="md">

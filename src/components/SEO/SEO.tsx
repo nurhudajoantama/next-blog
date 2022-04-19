@@ -4,20 +4,20 @@ import { Post } from "../../../types/Post";
 import config from "../../../config/config";
 import SchemaOrg from "./SchemaOrg";
 
-type DataPage = {
+interface DataPage {
   title?: string;
   description?: string;
   image?: string;
   url?: string;
-};
+}
 
-type SeoProps = {
+export interface SeoProps {
   dataPage?: DataPage;
   postData?: Post;
   isBlogPost?: boolean;
-};
+}
 
-export default function Seo({ dataPage, postData, isBlogPost = false }: SeoProps) {
+const Seo: React.FC<SeoProps> = ({ dataPage, postData, isBlogPost = false }) => {
   const postMeta = dataPage || postData || undefined;
 
   const title = postMeta?.title || config.siteTitle;
@@ -63,4 +63,6 @@ export default function Seo({ dataPage, postData, isBlogPost = false }: SeoProps
       />
     </Head>
   );
-}
+};
+
+export default Seo;

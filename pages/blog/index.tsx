@@ -51,15 +51,15 @@ const Index: React.FC<BlogProps> = (props) => {
   };
 
   return (
-    <PageLayout>
-      <Seo
-        dataPage={{
+    <PageLayout
+      seo={{
+        dataPage: {
           title: "Blog - Nurhuda Joantama Putra",
           description: "Blog page of Nurhuda Joantama Putra",
           url: "/blog",
-        }}
-      />
-
+        },
+      }}
+    >
       <Box>
         {/* Box on top */}
         <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
