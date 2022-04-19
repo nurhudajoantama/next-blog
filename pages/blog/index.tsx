@@ -10,6 +10,7 @@ import { getAllBlogFromCache } from "../../src/lib/get-cache";
 import { useRouter } from "next/router";
 import AnimatedSection from "../../src/components/animation/AnimatedSection";
 import { PageLayout } from "../../src/components/layout/PageLayout";
+import { AnimatePresence } from "framer-motion";
 
 interface BlogProps {
   blogs: Post[];
@@ -80,6 +81,7 @@ const Index: React.FC<BlogProps> = (props) => {
       </Box>
 
       {/* Blog List */}
+
       {blogs.length == 0 && (
         <Box px={7} py={10} rounded="lg">
           <Text as="h3" fontSize="2xl" fontWeight="black" letterSpacing="widest" textAlign="center">
@@ -87,13 +89,16 @@ const Index: React.FC<BlogProps> = (props) => {
           </Text>
         </Box>
       )}
+
       <Box my={12} mx={2}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, xl: 12 }}>
-          {blogs.map((blog, index) => (
-            <AnimatedSection key={blog.slug} delay={Math.round((index + 1) / 2) / 10}>
-              <Blog blog={blog} />
-            </AnimatedSection>
-          ))}
+          <AnimatePresence exitBeforeEnter initial={true}>
+            {blogs.map((blog, index) => (
+              <AnimatedSection key={blog.slug} delay={Math.round((index + 1) / 2) / 10}>
+                <Blog blog={blog} />
+              </AnimatedSection>
+            ))}
+          </AnimatePresence>
         </SimpleGrid>
       </Box>
     </PageLayout>
