@@ -23,7 +23,7 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
     <PageLayout>
       <Seo postData={blog} isBlogPost />
       <PrismStyle />
-      <Container maxW="container.md" mt={12} mb={7}>
+      <Container maxW="container.md" mb={7}>
         <Box>
           <MyBreadcrumb />
           <Text fontSize="3xl" fontWeight="bold">

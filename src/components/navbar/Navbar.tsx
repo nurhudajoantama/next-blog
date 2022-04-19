@@ -30,37 +30,40 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-      <Container maxW="container.xl">
-        <Flex h={16} alignItems="center" justifyContent="space-between">
-          {/* left side title or logo */}
-          <Box>
-            <Text as="h6" fontSize="xl" fontWeight="bold">
-              <Link href="/">Nurhuda</Link>
-            </Text>
-          </Box>
+    <>
+      <Box position="fixed" as="nav" w="100%" zIndex={99} bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Container maxW="container.xl">
+          <Flex h={16} alignItems="center" justifyContent="space-between">
+            {/* left side title or logo */}
+            <Box>
+              <Text as="h6" fontSize="xl" fontWeight="bold">
+                <Link href="/">Nurhuda</Link>
+              </Text>
+            </Box>
 
-          {/* for wide device  */}
-          <Box
-            display={{
-              base: "none",
-              md: "block",
-            }}
-          >
-            <WideNavbar links={navLinks} />
-          </Box>
+            {/* for wide device  */}
+            <Box
+              display={{
+                base: "none",
+                md: "block",
+              }}
+            >
+              <WideNavbar links={navLinks} />
+            </Box>
 
-          {/* for small device using drawer */}
-          <Box
-            display={{
-              base: "block",
-              md: "none",
-            }}
-          >
-            <TightNavbar links={navLinks} />
-          </Box>
-        </Flex>
-      </Container>
-    </Box>
+            {/* for small device using drawer */}
+            <Box
+              display={{
+                base: "block",
+                md: "none",
+              }}
+            >
+              <TightNavbar links={navLinks} />
+            </Box>
+          </Flex>
+        </Container>
+      </Box>
+      <Box pb={16}></Box>
+    </>
   );
 }
