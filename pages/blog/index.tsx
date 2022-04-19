@@ -10,6 +10,7 @@ import Seo from "../../src/components/SEO/SEO";
 import { GetStaticProps } from "next";
 import { getAllBlogFromCache } from "../../src/lib/get-cache";
 import { useRouter } from "next/router";
+import AnimatedSection from "../../src/components/animation/AnimatedSection";
 
 interface BlogProps {
   blogs: Post[];
@@ -61,21 +62,24 @@ const Index: React.FC<BlogProps> = (props) => {
       />
 
       <Box>
-        {/* Box on top */}
-        <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
-          {/* Title */}
-          <Text as="h1" fontSize="3xl" fontWeight="black" letterSpacing="widest">
-            <Link href="/blog">Blog</Link>
-          </Text>
-        </Box>
-        {/* Search */}
+        <AnimatedSection delay={0.1}>
+          {/* Box on top */}
+          <Box px={7} py={12} rounded="md" bg={useColorModeValue("gray.100", "gray.700")}>
+            {/* Title */}
+            <Text as="h1" fontSize="3xl" fontWeight="black" letterSpacing="widest">
+              <Link href="/blog">Blog</Link>
+            </Text>
+          </Box>
 
-        <InputGroup my={7} display="flex" alignItems="center">
-          <InputLeftElement pointerEvents="none" top="unset" pl={2}>
-            <SearchIcon />
-          </InputLeftElement>
-          <Input name="search" onChange={handleSearch} value={search} placeholder="What you want to find ?" py={3} rounded="sm" size="xl" w="full" />
-        </InputGroup>
+          {/* Search */}
+
+          <InputGroup my={7} display="flex" alignItems="center">
+            <InputLeftElement pointerEvents="none" top="unset" pl={2}>
+              <SearchIcon />
+            </InputLeftElement>
+            <Input name="search" onChange={handleSearch} value={search} placeholder="What you want to find ?" py={3} rounded="sm" size="xl" w="full" />
+          </InputGroup>
+        </AnimatedSection>
       </Box>
 
       {/* Blog List */}
@@ -88,8 +92,10 @@ const Index: React.FC<BlogProps> = (props) => {
       )}
       <Box my={12} mx={2}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, xl: 12 }}>
-          {blogs.map((blog) => (
-            <Blog key={blog.slug} blog={blog} />
+          {blogs.map((blog, index) => (
+            <AnimatedSection key={blog.slug} delay={Math.round((index + 1) / 2) / 10}>
+              <Blog blog={blog} />
+            </AnimatedSection>
           ))}
         </SimpleGrid>
       </Box>

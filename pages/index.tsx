@@ -9,6 +9,7 @@ import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
 import { getAllBlogFromCache } from "../src/lib/get-cache";
 import Seo from "../src/components/SEO/SEO";
+import AnimatedSection from "../src/components/animation/AnimatedSection";
 
 type IndexProps = {
   blogs: Post[];
@@ -19,16 +20,20 @@ export default function Index({ blogs }: IndexProps) {
     <MainLayout>
       <Seo />
       {/* Main title */}
-      <Center p={3} borderBottom="4px" mb={12}>
-        <Text as="h1" fontSize="6xl" fontWeight="black">
-          Nurhuda Joantama Putra
-        </Text>
-      </Center>
+      <AnimatedSection delay={0.1}>
+        <Center p={3} borderBottom="4px" mb={12}>
+          <Text as="h1" fontSize="6xl" fontWeight="black">
+            Nurhuda Joantama Putra
+          </Text>
+        </Center>
+      </AnimatedSection>
 
       {/* About */}
-      <Container maxW="container.md" mb={7}>
-        <About />
-      </Container>
+      <AnimatedSection delay={0.15}>
+        <Container maxW="container.md" mb={7}>
+          <About />
+        </Container>
+      </AnimatedSection>
 
       <Box>
         <Link href="#latest-blog" role="group">
@@ -48,14 +53,18 @@ export default function Index({ blogs }: IndexProps) {
       </Box>
 
       {/* Quotes */}
-      <Box mt={5} mb={12}>
-        <Quotes />
-      </Box>
+      <AnimatedSection delay={0.2}>
+        <Box mt={5} mb={12}>
+          <Quotes />
+        </Box>
+      </AnimatedSection>
 
       {/* Latest Blog */}
-      <Container maxW="container.lg" id="latest-blog" mb={20}>
-        <LatestBlog blogs={blogs} />
-      </Container>
+      <AnimatedSection delay={0.25}>
+        <Container maxW="container.lg" id="latest-blog" mb={20}>
+          <LatestBlog blogs={blogs} />
+        </Container>
+      </AnimatedSection>
 
       <Flex justifyContent="end">
         <NextLink href="/" passHref>
