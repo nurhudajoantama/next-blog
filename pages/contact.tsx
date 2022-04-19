@@ -8,6 +8,7 @@ import FacebookIcon from "../src/components/icons/FacebookIcon";
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 import Seo from "../src/components/SEO/SEO";
 import { PageLayout } from "../src/components/layout/PageLayout";
+import AnimatedSection from "../src/components/animation/AnimatedSection";
 
 const socials = [
   {
@@ -61,24 +62,26 @@ export default function Contact() {
         </Box>
         <Box ml={7} borderLeft="2px" pl={5} pt={12} pb={2} mb={24}>
           <VStack spacing={9} align="start">
-            {socials.map((social) => (
-              <a key={social.name} href={social.url} role="group" target="_blank" rel="noreferrer">
-                <Flex>
-                  <social.icon
-                    fontSize="5xl"
-                    cursor="pointer"
-                    _groupHover={{
-                      color: "blue.500",
-                    }}
-                  />
-                  <Box ml={5}>
-                    <Text as="p">{social.name}</Text>
-                    <Text as="p" color="gray.500" textDecoration="none">
-                      {social.desc}
-                    </Text>
-                  </Box>
-                </Flex>
-              </a>
+            {socials.map((social, index) => (
+              <AnimatedSection key={social.name} delay={index / 10}>
+                <a href={social.url} role="group" target="_blank" rel="noreferrer">
+                  <Flex>
+                    <social.icon
+                      fontSize="5xl"
+                      cursor="pointer"
+                      _groupHover={{
+                        color: "blue.500",
+                      }}
+                    />
+                    <Box ml={5}>
+                      <Text as="p">{social.name}</Text>
+                      <Text as="p" color="gray.500" textDecoration="none">
+                        {social.desc}
+                      </Text>
+                    </Box>
+                  </Flex>
+                </a>
+              </AnimatedSection>
             ))}
           </VStack>
         </Box>
