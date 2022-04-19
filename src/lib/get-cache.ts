@@ -30,12 +30,15 @@ export const getBlogFromSlugCache = (slug: string): Post | null => {
 };
 
 export const getIndexSearch = () => {
-  const files_path = join(process.cwd(), `/public/json/index_search.json`);
-  try {
-    const data = fs.readFileSync(files_path, "utf8");
-    const search_index = JSON.parse(data);
-    return search_index;
-  } catch (e) {
-    console.log(e);
-  }
+  // const files_path = join(process.cwd(), `/public/json/index_search.json`);
+  // try {
+  //   const data = fs.readFileSync(files_path, "utf8");
+  //   const search_index = JSON.parse(data);
+  //   return search_index;
+  // } catch (e) {
+  //   console.log(e);
+  // }
+
+  const search_index = require("../../cache/index_search");
+  return search_index;
 };

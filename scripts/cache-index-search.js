@@ -3,9 +3,9 @@ const fs = require("fs");
 const { getAllPosts } = require("../src/lib/post-api");
 
 try {
-  fs.readdirSync("public/json");
+  fs.readdirSync("cache");
 } catch {
-  fs.mkdirSync("public/json");
+  fs.mkdirSync("cache");
 }
 
 const data_posts = getAllPosts(["title", "date", "slug", "thumbnail", "tags", "content"]);
@@ -25,7 +25,9 @@ data_posts.forEach((post) => {
   });
 });
 
-fs.writeFile("public/json/index_search.json", JSON.stringify(idx), (err) => {
+const data = `module.exports = ${JSON.stringify(idx)};`;
+
+fs.writeFile("cache/index_search.js", data, (err) => {
   if (err) throw err;
   console.log("File saved");
 });
