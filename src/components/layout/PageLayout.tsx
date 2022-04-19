@@ -10,7 +10,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children, seo = {} }) =>
   return (
     <>
       <Seo {...seo} />
-      <AnimationPage>{children}</AnimationPage>;
+      <AnimationPage>{children}</AnimationPage>
     </>
   );
 };
