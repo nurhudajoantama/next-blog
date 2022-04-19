@@ -10,7 +10,6 @@ export default function Custom404() {
   const { asPath } = useRouter();
   return (
     <PageLayout>
-      <Seo />
       <Box h={500}>
         <Text as="h1" fontSize="9xl" fontWeight="black" letterSpacing="widest">
           404

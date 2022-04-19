@@ -16,9 +16,7 @@ type IndexProps = {
 export default function Index({ blogs }: IndexProps) {
   return (
     <PageLayout>
-      <Seo />
       {/* Main title */}
-
       <Center p={3} borderBottom="4px" mb={12}>
         <Text as="h1" fontSize="6xl" fontWeight="black">
           Nurhuda Joantama Putra
@@ -26,7 +24,6 @@ export default function Index({ blogs }: IndexProps) {
       </Center>
 
       {/* About */}
-
       <Container maxW="container.md" mb={7}>
         <About />
       </Container>
@@ -49,13 +46,11 @@ export default function Index({ blogs }: IndexProps) {
       </Box>
 
       {/* Quotes */}
-
       <Box mt={5} mb={12}>
         <Quotes />
       </Box>
 
       {/* Latest Blog */}
-
       <Container maxW="container.lg" id="latest-blog" mb={20}>
         <LatestBlog blogs={blogs} />
       </Container>
