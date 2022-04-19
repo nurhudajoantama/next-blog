@@ -30,7 +30,7 @@ export const getBlogFromSlugCache = (slug: string): Post | null => {
 };
 
 export const getIndexSearch = () => {
-  const files_path = join(process.cwd(), `/cache/index_search.json`);
+  const files_path = join(process.cwd(), `/public/json/index_search.json`);
   try {
     const data = fs.readFileSync(files_path, "utf8");
     const search_index = JSON.parse(data);
