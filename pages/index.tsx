@@ -1,8 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Box, Center, Container, Flex, IconButton, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import MainLayout from "../src/components/layout/MainLayout";
-import { getAllPosts } from "../src/lib/post-api";
 import { Post } from "../types/Post";
 import About from "../src/components/home/About";
 import LatestBlog from "../src/components/home/LatestBlog";
@@ -17,7 +15,7 @@ type IndexProps = {
 
 export default function Index({ blogs }: IndexProps) {
   return (
-    <MainLayout>
+    <>
       <Seo />
       {/* Main title */}
       <AnimatedSection delay={0.1}>
@@ -88,7 +86,7 @@ export default function Index({ blogs }: IndexProps) {
           </Flex>
         </NextLink>
       </Flex>
-    </MainLayout>
+    </>
   );
 }
 

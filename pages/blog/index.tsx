@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-import { Box, Container, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
-import MainLayout from "../../src/components/layout/MainLayout";
+import { Box, Input, InputGroup, InputLeftElement, SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Post } from "../../types/Post";
@@ -52,7 +50,7 @@ const Index: React.FC<BlogProps> = (props) => {
   };
 
   return (
-    <MainLayout>
+    <>
       <Seo
         dataPage={{
           title: "Blog - Nurhuda Joantama Putra",
@@ -99,7 +97,7 @@ const Index: React.FC<BlogProps> = (props) => {
           ))}
         </SimpleGrid>
       </Box>
-    </MainLayout>
+    </>
   );
 };
 

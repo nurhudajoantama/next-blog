@@ -4,12 +4,15 @@ import theme from "../src/theme";
 import Fonts from "../src/styles/Fonts";
 
 import "../src/styles/global.css";
+import MainLayout from "../src/components/layout/MainLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Fonts />
-      <Component {...pageProps} />
+      <MainLayout>
+        <Fonts />
+        <Component {...pageProps} />
+      </MainLayout>
     </ChakraProvider>
   );
 }

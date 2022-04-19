@@ -1,12 +1,10 @@
 import React from "react";
 import { Box, Container, Flex, Text, useColorModeValue, VStack } from "@chakra-ui/react";
-import MainLayout from "../src/components/layout/MainLayout";
 import GithubIcon from "../src/components/icons/GithubIcon";
 import InstagramIcon from "../src/components/icons/InstagramIcon";
 import TwitterIcon from "../src/components/icons/TwitterIcon";
 import LinkedinIcon from "../src/components/icons/LinkedinIcon";
 import FacebookIcon from "../src/components/icons/FacebookIcon";
-
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 import Seo from "../src/components/SEO/SEO";
 
@@ -45,7 +43,7 @@ const socials = [
 
 export default function Contact() {
   return (
-    <MainLayout>
+    <>
       <Seo
         dataPage={{
           title: "Contact - Nurhuda Joantama Putra",
@@ -84,6 +82,6 @@ export default function Contact() {
           </VStack>
         </Box>
       </Container>
-    </MainLayout>
+    </>
   );
 }

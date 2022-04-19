@@ -3,13 +3,12 @@ import { Box, Button, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MainLayout from "../src/components/layout/MainLayout";
 import Seo from "../src/components/SEO/SEO";
 
 export default function Custom404() {
   const { asPath } = useRouter();
   return (
-    <MainLayout>
+    <>
       <Seo />
       <Box h={500}>
         <Text as="h1" fontSize="9xl" fontWeight="black" letterSpacing="widest">
@@ -34,6 +33,6 @@ export default function Custom404() {
           </Link>
         </Box>
       </Box>
-    </MainLayout>
+    </>
   );
 }
