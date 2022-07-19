@@ -7,11 +7,11 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import components from "../../src/components/blog/MDXcomponents";
 import PrismStyle from "../../src/styles/PrismStyle";
 import MyBreadcrumb from "../../src/components/breadcrumb/MyBreadcrumb";
-import Seo from "../../src/components/SEO/SEO";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllBlogFromCache, getBlogFromSlugCache } from "../../src/lib/get-cache";
 import { PageLayout } from "../../src/components/layout/PageLayout";
-
+import config from "../../config/config";
+import { DiscussionEmbed } from "disqus-react";
 interface BlogProps {
   blog: Post;
   source: MDXRemoteSerializeResult;
@@ -19,6 +19,13 @@ interface BlogProps {
 
 const Blog: React.FC<BlogProps> = ({ blog, source }) => {
   const tagBgColor = useColorModeValue("gray.200", "gray.700");
+  const disqusShortname = "nurhudajoantama";
+  const disqusConfig = {
+    url: config.siteUrl,
+    identifier: blog.slug, // Single post id
+    title: blog.title, // Single post title
+  };
+
   return (
     <PageLayout seo={{ postData: blog, isBlogPost: true }}>
       <PrismStyle />
@@ -48,6 +55,9 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
         </Box>
         <Box>
           <MDXRemote {...source} components={components} />
+        </Box>
+        <Box mt={10}>
+          <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
         </Box>
       </Container>
     </PageLayout>
