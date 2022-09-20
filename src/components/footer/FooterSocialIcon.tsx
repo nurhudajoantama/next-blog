@@ -7,17 +7,17 @@ export default function FooterSocialIcon() {
   const socials = [
     {
       name: "Github",
-      url: "https://github.com",
+      url: "https://github.com/nurhudajoantama/",
       icon: GithubIcon,
     },
     {
       name: "Instagram",
-      url: "",
+      url: "https://www.instagram.com/nurhudajoantama/",
       icon: InstagramIcon,
     },
     {
       name: "Twitter",
-      url: "",
+      url: "https://twitter.com/JoantamaP",
       icon: TwitterIcon,
     },
   ];
