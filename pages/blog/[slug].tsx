@@ -56,8 +56,12 @@ const Blog: React.FC<BlogProps> = ({ blog, source }) => {
         <Box>
           <MDXRemote {...source} components={components} />
         </Box>
-        <Box mt={10}>
-          <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      </Container>
+      <Container maxW="container.lg">
+        <Box py={7} mt={10} background="#fff" rounded={"lg"}>
+          <Container maxW="container.md">
+            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+          </Container>
         </Box>
       </Container>
     </PageLayout>

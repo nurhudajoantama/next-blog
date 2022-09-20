@@ -3,6 +3,7 @@ import React from "react";
 
 interface AnimatedSectionProps {
   delay?: number;
+  children: React.ReactNode;
 }
 
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, delay = 0 }) => {

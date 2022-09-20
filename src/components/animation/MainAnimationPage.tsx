@@ -1,10 +1,14 @@
 import React from "react";
 import { AnimatePresence } from "framer-motion";
 
-const MainAnimationPage: React.FC = ({ children }) => {
+interface MainAnimationPageProps {
+  children: React.ReactNode;
+}
+
+const MainAnimationPage: React.FC<MainAnimationPageProps> = ({ children }) => {
   return (
     <AnimatePresence
-      exitBeforeEnter
+      mode="wait"
       initial={true}
       onExitComplete={() => {
         if (typeof window !== "undefined") {

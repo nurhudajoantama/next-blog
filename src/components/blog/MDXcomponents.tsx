@@ -1,5 +1,4 @@
 import { Divider, Image, ImageProps, Link, ListItem, ListItemProps, ListProps, LinkProps, OrderedList, Text, TextProps, UnorderedList, useColorModeValue, Box } from "@chakra-ui/react";
-
 import QuoteIcon from "../icons/QuoteIcon";
 
 function Blockquote(props: TextProps) {
@@ -17,7 +16,7 @@ function LinkBlock(props: LinkProps) {
   return <Link color={useColorModeValue("blue.600", "blue.300")} {...props} />;
 }
 
-const components = {
+const components: any = {
   // Heading
   h1: (props: TextProps) => <Text as="h1" fontSize="3xl" fontWeight="bold" {...props} />,
   h2: (props: TextProps) => <Text as="h2" fontSize="2xl" fontWeight="bold" {...props} />,

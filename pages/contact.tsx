@@ -6,7 +6,6 @@ import TwitterIcon from "../src/components/icons/TwitterIcon";
 import LinkedinIcon from "../src/components/icons/LinkedinIcon";
 import FacebookIcon from "../src/components/icons/FacebookIcon";
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
-import Seo from "../src/components/SEO/SEO";
 import { PageLayout } from "../src/components/layout/PageLayout";
 import AnimatedSection from "../src/components/animation/AnimatedSection";
 

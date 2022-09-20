@@ -2,7 +2,6 @@ import { Box, Container, Text } from "@chakra-ui/react";
 import React from "react";
 import MyBreadcrumb from "../src/components/breadcrumb/MyBreadcrumb";
 import { PageLayout } from "../src/components/layout/PageLayout";
-import Seo from "../src/components/SEO/SEO";
 
 function AboutText() {
   return (

@@ -7,7 +7,11 @@ const variants = {
   exit: { opacity: 0, x: -0, y: 20 },
 };
 
-export const AnimationPage: React.FC = ({ children }) => {
+interface AnimationPageProps {
+  children: React.ReactNode;
+}
+
+export const AnimationPage: React.FC<AnimationPageProps> = ({ children }) => {
   return (
     <motion.article initial="hidden" animate="enter" exit="exit" variants={variants} transition={{ duration: 0.4, type: "easeInOut" }} style={{ position: "relative" }}>
       {children}
