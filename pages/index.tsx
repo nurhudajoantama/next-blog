@@ -6,7 +6,6 @@ import About from "../src/components/home/About";
 import LatestBlog from "../src/components/home/LatestBlog";
 import Quotes from "../src/components/home/Quotes";
 import { getAllBlogFromCache } from "../src/lib/get-cache";
-import Seo from "../src/components/SEO/SEO";
 import { PageLayout } from "../src/components/layout/PageLayout";
 
 type IndexProps = {
