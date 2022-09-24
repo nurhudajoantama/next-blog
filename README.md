@@ -1,6 +1,6 @@
 # MY BLOG
 
-This repository contains my blog site, run in [nurhudajoantama.me](https://nurhudajoantama.me).
+This repository contains my blog site, run in [nurhudajoantama.tech](https://nurhudajoantama.tech).
 
 ## To run the site
 
