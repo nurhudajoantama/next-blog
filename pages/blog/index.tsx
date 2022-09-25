@@ -92,7 +92,7 @@ const Index: React.FC<BlogProps> = (props) => {
 
       <Box my={12} mx={2}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, xl: 12 }}>
-          <AnimatePresence exitBeforeEnter initial={true}>
+          <AnimatePresence mode="wait" initial={true}>
             {blogs.map((blog, index) => (
               <AnimatedSection key={blog.slug} delay={Math.round((index + 1) / 2) / 10}>
                 <Blog blog={blog} />
