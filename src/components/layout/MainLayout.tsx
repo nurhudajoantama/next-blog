@@ -10,7 +10,7 @@ type MainLayoutProps = {
 export default function MainLayout(props: MainLayoutProps) {
   return (
     <>
-      <Seo />
+      {/* <Seo /> */}
       <Navbar />
       <Container maxW="container.xl" pt={7}>
         {props.children}
